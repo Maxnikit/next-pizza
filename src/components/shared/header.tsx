@@ -1,4 +1,6 @@
-import { Container } from "@/components/shared/container";
+import { Container } from "@/components/shared";
+import { Button } from "@/components/ui";
+
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
@@ -20,6 +22,12 @@ export function Header({ className }: Props) {
               вкусней уже некуда
             </p>
           </div>
+        </div>
+
+        {/* Правая часть */}
+        <div className="flex items-center gap-4">
+          <Button variant="outline">Войти</Button>
+          <Button>Регистрация</Button>
         </div>
       </Container>
     </header>
