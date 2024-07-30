@@ -30,3 +30,7 @@ export default function RootLayout({
     </html>
   );
 }
+
+// TODO Сделать адаптивную вёрстку
+// TODO улучшить семантику (nav, section, article и т.д.)
+// TODO Разработать Dashboard
