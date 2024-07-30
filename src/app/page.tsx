@@ -14,7 +14,7 @@ export default function Home() {
         <Title text="Все пиццы" size="lg" className="font-extrabold" />
       </Container>
       <TopBar />
-      <Container className="pb-14">
+      <Container className="mt-10 pb-14">
         <div className="flex gap-[60px]">
           {/* Фильтрация */}
           <div className="w-[250px]">
