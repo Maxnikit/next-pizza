@@ -5,7 +5,7 @@ import { Categories, Container, SortPopup } from "@/components/shared";
 
 interface Props {
   //   categories: Category[];
-  categories: string[];
+  categories?: string[];
   className?: string;
 }
 
