@@ -15,10 +15,10 @@ type Props = {
 
 export function ProductCard({ id, name, price, imageUrl, className }: Props) {
   return (
-    <div className={className}>
+    <article className={className}>
       <Link href={`/products/${id}`}>
         <div className="h-[260px ] flex justify-center rounded-lg bg-secondary p-6">
-          <img src={imageUrl} alt={name} width={200} height={200} />
+          <Image src={imageUrl} alt={name} width={200} height={200} />
         </div>
 
         <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />
@@ -37,6 +37,6 @@ export function ProductCard({ id, name, price, imageUrl, className }: Props) {
           </Button>
         </div>
       </Link>
-    </div>
+    </article>
   );
 }
