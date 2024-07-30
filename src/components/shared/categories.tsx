@@ -4,7 +4,7 @@ import React from "react";
 type Props = {
   className?: string;
 };
-
+// TODO get categories from API inside top-bar.tsx
 const cats = ["Все", "Пицца", "Салаты", "Напитки", "Десерты"];
 const activeIndex = 0;
 export function Categories({ className }: Props) {
