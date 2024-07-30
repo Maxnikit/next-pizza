@@ -11,7 +11,7 @@ type Item = FilterCheckboxProps;
 type Props = {
   title: string;
   items: Item[];
-  defaultItems?: Item[];
+  defaultItems: Item[];
   limit?: number;
   searchInputPlaceholder?: string;
   onChange?: (values: string[]) => void;
@@ -29,18 +29,24 @@ export function CheckboxFilterGroup({
   defaultValue,
   className,
 }: Props) {
+  const [showAll, setShowAll] = React.useState(false);
+
+  const list = showAll ? items : defaultItems?.slice(0, limit);
   return (
     <div className={className}>
       <p className="mb-3 font-bold">{title}</p>
-      <div className="mb-5">
-        <Input
-          placeholder={searchInputPlaceholder}
-          className="border-none bg-gray-50"
-        />
-      </div>
+
+      {showAll && (
+        <div className="mb-5">
+          <Input
+            placeholder={searchInputPlaceholder}
+            className="border-none bg-gray-50"
+          />
+        </div>
+      )}
 
       <div className="scrollbar flex max-h-96 flex-col gap-4 overflow-auto pr-2">
-        {items.map((item, index) => (
+        {list.map((item, index) => (
           <FilterCheckbox
             key={index}
             text={item.text}
@@ -51,6 +57,17 @@ export function CheckboxFilterGroup({
           />
         ))}
       </div>
+
+      {items.length > limit && (
+        <div className={showAll ? "mt-4 border-t border-t-neutral-100" : ""}>
+          <button
+            className="mt-3 text-primary"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "Скрыть" : "+ Показать все"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
