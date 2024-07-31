@@ -15,7 +15,8 @@ type Props = {
 };
 
 export function Filters({ className }: Props) {
-  const { ingredients, loading } = useFilterIngredients();
+  const { ingredients, loading, selectedIds, toggleId } =
+    useFilterIngredients();
   const cutIngredients = ingredients.map((ingredient) => ({
     text: ingredient.name,
     value: String(ingredient.id),
@@ -26,9 +27,10 @@ export function Filters({ className }: Props) {
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
 
       {/* Верхние чекбоксы */}
+      {/* TODO подумать о том, чтобы добавлять разный name группам чекбоксов вместо того, чтобы писать cookable и new в value. 6:20:00-6:23:00 https://www.youtube.com/watch?v=GUwizGbY4cc */}
       <div className="flex flex-col gap-4">
-        <FilterCheckbox text="Можно собирать" value="1" />
-        <FilterCheckbox text="Новинки" value="2" />
+        <FilterCheckbox text="Можно собирать" value="cookable" />
+        <FilterCheckbox text="Новинки" value="new" />
       </div>
 
       {/* Цена */}
@@ -51,10 +53,12 @@ export function Filters({ className }: Props) {
       <CheckboxFilterGroup
         title="Ингредиенты:"
         className="mt-5"
-        limit={3}
+        limit={6}
         items={cutIngredients}
         defaultItems={cutIngredients}
         loading={loading}
+        onClickCheckbox={toggleId}
+        selectedIds={selectedIds}
       />
     </div>
   );
