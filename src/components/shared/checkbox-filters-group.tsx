@@ -17,11 +17,12 @@ type Props = {
   onClickCheckbox?: (id: string) => void;
   defaultValue?: string[];
   className?: string;
-  loading: boolean;
+  loading?: boolean;
   selectedIds: Set<string>;
+  name?: string;
 };
 
-export function CheckboxFilterGroup({
+export function CheckboxFiltersGroup({
   title,
   items,
   defaultItems,
@@ -32,6 +33,7 @@ export function CheckboxFilterGroup({
   className,
   loading,
   selectedIds,
+  name,
 }: Props) {
   const [showAll, setShowAll] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
@@ -74,6 +76,7 @@ export function CheckboxFilterGroup({
         {list.map((item, index) => (
           <FilterCheckbox
             key={index}
+            name={name}
             text={item.text}
             value={item.value}
             endAdornment={item.endAdornment}

@@ -1,6 +1,6 @@
 "use client";
 import {
-  CheckboxFilterGroup,
+  CheckboxFiltersGroup,
   FilterCheckbox,
   RangeSlider,
   Title,
@@ -14,25 +14,52 @@ type Props = {
   className?: string;
 };
 
+type PriceProps = {
+  priceFrom: number;
+  priceTo: number;
+};
+
 export function Filters({ className }: Props) {
   const { ingredients, loading, selectedIds, toggleId } =
     useFilterIngredients();
+  const [prices, setPrices] = React.useState<PriceProps>({
+    priceFrom: 0,
+    priceTo: 5000,
+  });
   const cutIngredients = ingredients.map((ingredient) => ({
     text: ingredient.name,
     value: String(ingredient.id),
   }));
 
+  const updatePrice = (name: keyof PriceProps, value: number) => {
+    setPrices({
+      ...prices,
+      [name]: value,
+    });
+  };
+  const updatePrices = (prices: number[]){
+    setPrices()
+  }
   return (
     <div className={cn("", className)}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
 
       {/* Верхние чекбоксы */}
-      {/* TODO подумать о том, чтобы добавлять разный name группам чекбоксов вместо того, чтобы писать cookable и new в value. 6:20:00-6:23:00 https://www.youtube.com/watch?v=GUwizGbY4cc */}
-      <div className="flex flex-col gap-4">
-        <FilterCheckbox text="Можно собирать" value="cookable" />
-        <FilterCheckbox text="Новинки" value="new" />
-      </div>
+    
+{/* TODO доделать эти чекбоксы */}
+      <CheckboxFiltersGroup
+        title="Размеры"
+        name="sizes"
+        className="mb-5"
 
+        // onClickCheckbox={filters.setSizes}
+        // selected={filters.sizes}
+        items={[
+          { text: "20 см", value: "20" },
+          { text: "30 см", value: "30" },
+          { text: "40 см", value: "40" },
+        ]}
+      />
       {/* Цена */}
       <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
         <p className="mb-3 font-bold">Цена от и до:</p>
@@ -42,16 +69,31 @@ export function Filters({ className }: Props) {
             placeholder="0"
             min={0}
             max={1000}
-            defaultValue={0}
+            value={String(prices.priceFrom)}
+            onChange={(e) => updatePrice("priceFrom", +e.target.value)}
           />
-          <Input type="number" placeholder="0" min={100} max={30000} />
+          <Input
+            type="number"
+            placeholder="0"
+            min={100}
+            max={1000}
+            value={String(prices.priceTo)}
+            onChange={(e) => updatePrice("priceTo", +e.target.value)}
+          />
         </div>
-        <RangeSlider min={0} max={5000} step={100} value={[0, 5000]} />
+        <RangeSlider
+          min={0}
+          max={1000}
+          step={10}
+          value={[prices.priceFrom || 0, prices.priceTo || 1000]}
+          onValueChange={updatePrices}
+        />
       </div>
 
       {/* Ингредиенты */}
-      <CheckboxFilterGroup
+      <CheckboxFiltersGroup
         title="Ингредиенты:"
+        name="ingredients"
         className="mt-5"
         limit={6}
         items={cutIngredients}
