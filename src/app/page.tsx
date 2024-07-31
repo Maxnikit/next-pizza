@@ -81,6 +81,116 @@ export default function Home() {
                   },
                 ]}
               />
+              <ProductsGroupList
+                title="Завтраки"
+                categoryId={1}
+                products={[
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                ]}
+              />
+              <ProductsGroupList
+                title="Напитки"
+                categoryId={2}
+                products={[
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                ]}
+              />
             </div>
           </div>
         </div>
