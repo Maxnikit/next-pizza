@@ -6,6 +6,7 @@ import {
   SortPopup,
   Title,
   TopBar,
+  ProductsGroupList,
 } from "@/components/shared";
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
       </Container>
       <TopBar />
       <Container className="mt-10 pb-14">
-        <div className="flex gap-[60px]">
+        <div className="flex gap-[80px]">
           {/* Фильтрация */}
           <div className="w-[250px]">
             <Filters />
@@ -25,11 +26,60 @@ export default function Home() {
           {/* Список товаров */}
           <div className="flex-1">
             <div className="flex flex-col gap-16">
-              <ProductCard
-                id={1}
-                name="Пицца Маргарита"
-                price={2500}
-                imageUrl="https://media.dodostatic.net/image/r:292x292/11EE7D610D2925109AB2E1C92CC5383C.avif"
+              <ProductsGroupList
+                title="Пиццы"
+                categoryId={0}
+                products={[
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                  {
+                    id: 0,
+                    name: "Пицца 1",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EEFB595A197C24BA932A0AD1144AFB.avif",
+                    items: [{ price: 550 }],
+                  },
+                ]}
               />
             </div>
           </div>
