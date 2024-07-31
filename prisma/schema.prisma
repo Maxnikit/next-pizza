@@ -111,7 +111,7 @@ model CartItem {
 
     quantity Int @default(1)
 
-    ingedients Ingredient[]
+    ingredients Ingredient[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
