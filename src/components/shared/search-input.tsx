@@ -22,8 +22,13 @@ export function SearchInput({ className }: Props) {
   });
 
   useDebounce(
-    () => {
-      Api.products.search(searchQuery).then((items) => setProducts(items));
+    async () => {
+      try {
+        const response = await Api.products.search(searchQuery);
+        setProducts(response);
+      } catch (e) {
+        console.error(e);
+      }
     },
     250,
     [searchQuery],
