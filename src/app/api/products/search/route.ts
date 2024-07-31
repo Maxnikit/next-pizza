@@ -2,7 +2,8 @@ import { prisma } from "@/prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const query = req.nextUrl.searchParams.get("query") || "";
+  const query =
+    req.nextUrl.searchParams.get("query")?.toLocaleLowerCase() || "";
 
   const products = await prisma.product.findMany();
   // mode: "insensitive" не работает с vercel, поэтому получаем все продукты и самостоятельно фильтруем
