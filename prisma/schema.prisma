@@ -37,6 +37,8 @@ model Product {
 
     ingredients Ingredient[]
 
+    variations ProductVariation[]
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -52,4 +54,15 @@ model Ingredient {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model ProductVariation {
+    id Int @id @default(autoincrement())
+
+    price     Int
+    size      Int?
+    pizzaType String?
+
+    product   Product @relation(fields: [productId], references: [id])
+    productId Int
 }
