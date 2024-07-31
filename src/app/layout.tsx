@@ -34,3 +34,4 @@ export default function RootLayout({
 // TODO Сделать адаптивную вёрстку
 // TODO улучшить семантику (nav, section, article и т.д.)
 // TODO Разработать Dashboard
+// TODO скачать изображения товаров и поместить в public
