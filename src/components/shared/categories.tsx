@@ -1,20 +1,23 @@
+"use client";
 import { cn } from "@/lib/utils";
+import { useCategoryStore } from "@/store/category";
 import React from "react";
 
 type Props = {
   className?: string;
 };
 // TODO get categories from API inside top-bar.tsx
-const cats = ["Все", "Пицца", "Салаты", "Напитки", "Десерты"];
-const activeIndex = 0;
+const cats = ["Пиццы", "Салаты", "Напитки", "Десерты"];
 export function Categories({ className }: Props) {
+  const activeIndex = useCategoryStore((state) => state.activeId);
+
   return (
     <div
       className={cn("inline-flex gap-1 rounded-2xl bg-gray-50 p-1", className)}
     >
-      {cats.map((cat, index) => (
+      {cats.map((name, index) => (
         <a
-          href="google.com"
+          href={`/#${name}`}
           className={cn(
             "flex h-11 items-center rounded-2xl px-5 font-bold",
             activeIndex === index &&
@@ -22,7 +25,7 @@ export function Categories({ className }: Props) {
           )}
           key={index}
         >
-          <button>{cat}</button>
+          <button>{name}</button>
         </a>
       ))}
     </div>
