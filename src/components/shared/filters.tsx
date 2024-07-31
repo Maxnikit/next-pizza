@@ -1,3 +1,4 @@
+"use client";
 import {
   CheckboxFilterGroup,
   FilterCheckbox,
@@ -5,6 +6,7 @@ import {
   Title,
 } from "@/components/shared";
 import { Input } from "@/components/ui";
+import { useFilterIngredients } from "@/hooks/useFilterIngredients";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -13,6 +15,12 @@ type Props = {
 };
 
 export function Filters({ className }: Props) {
+  const { ingredients, loading } = useFilterIngredients();
+  const cutIngredients = ingredients.map((ingredient) => ({
+    text: ingredient.name,
+    value: String(ingredient.id),
+  }));
+
   return (
     <div className={cn("", className)}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
@@ -44,52 +52,9 @@ export function Filters({ className }: Props) {
         title="Ингредиенты:"
         className="mt-5"
         limit={3}
-        defaultItems={[
-          { text: "Сырный соус", value: "1" },
-          { text: "Сыр", value: "2" },
-          { text: "Моцарелла", value: "3" },
-          { text: "Помидоры", value: "4" },
-          { text: "Огурцы", value: "5" },
-          { text: "Лук", value: "6" },
-          { text: "Салат", value: "7" },
-          { text: "Сырный соус", value: "1" },
-          { text: "Сыр", value: "2" },
-          { text: "Моцарелла", value: "3" },
-          { text: "Помидоры", value: "4" },
-          { text: "Огурцы", value: "5" },
-          { text: "Лук", value: "6" },
-          { text: "Салат", value: "7" },
-          { text: "Сырный соус", value: "1" },
-          { text: "Сыр", value: "2" },
-          { text: "Моцарелла", value: "3" },
-          { text: "Помидоры", value: "4" },
-          { text: "Огурцы", value: "5" },
-          { text: "Лук", value: "6" },
-          { text: "Салат", value: "7" },
-        ]}
-        items={[
-          { text: "Сырный соус", value: "1" },
-          { text: "Сыр", value: "2" },
-          { text: "Моцарелла", value: "3" },
-          { text: "Помидоры", value: "4" },
-          { text: "Огурцы", value: "5" },
-          { text: "Лук", value: "6" },
-          { text: "Салат", value: "7" },
-          { text: "Сырный соус", value: "1" },
-          { text: "Сыр", value: "2" },
-          { text: "Моцарелла", value: "3" },
-          { text: "Помидоры", value: "4" },
-          { text: "Огурцы", value: "5" },
-          { text: "Лук", value: "6" },
-          { text: "Салат", value: "7" },
-          { text: "Сырный соус", value: "1" },
-          { text: "Сыр", value: "2" },
-          { text: "Моцарелла", value: "3" },
-          { text: "Помидоры", value: "4" },
-          { text: "Огурцы", value: "5" },
-          { text: "Лук", value: "6" },
-          { text: "Салат", value: "7" },
-        ]}
+        items={cutIngredients}
+        defaultItems={cutIngredients}
+        loading={loading}
       />
     </div>
   );

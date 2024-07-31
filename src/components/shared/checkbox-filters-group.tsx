@@ -4,7 +4,7 @@ import {
   FilterCheckbox,
   FilterCheckboxProps,
 } from "@/components/shared/filter-checkbox";
-import { Input } from "@/components/ui";
+import { Input, Skeleton } from "@/components/ui";
 import React from "react";
 
 type Item = FilterCheckboxProps;
@@ -17,6 +17,7 @@ type Props = {
   onChange?: (values: string[]) => void;
   defaultValue?: string[];
   className?: string;
+  loading: boolean;
 };
 
 export function CheckboxFilterGroup({
@@ -28,10 +29,22 @@ export function CheckboxFilterGroup({
   onChange,
   defaultValue,
   className,
+  loading,
 }: Props) {
   const [showAll, setShowAll] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
 
+  if (loading) {
+    return (
+      <div className={className}>
+        <p className="mb-3 font-bold">{title}</p>
+        {...Array(limit)
+          .fill(0)
+          .map((_, index) => <Skeleton key={index} className="mb-4 h-6" />)}
+        <Skeleton className="mb-4 h-6 w-28" />
+      </div>
+    );
+  }
   const list = showAll
     ? items.filter((item) =>
         item.text.toLowerCase().includes(searchValue.toLowerCase()),
