@@ -12,11 +12,18 @@ model User {
     id Int @id @default(autoincrement())
 
     fullName String
-    email    String
+    email    String @unique
     password String
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model Category {
+    id Int @id @default(autoincrement())
+
+    name     String    @unique
+    products Product[]
 }
 
 model Product {
@@ -24,6 +31,9 @@ model Product {
 
     name     String
     imageUrl String
+
+    category   Category @relation(fields: [categoryId], references: [id])
+    categoryId Int
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
