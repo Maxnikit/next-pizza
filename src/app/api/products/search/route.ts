@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams.get("query") || "";
 
   const products = await prisma.product.findMany();
-  console.log(query);
+  // mode: "insensitive" не работает с vercel, поэтому получаем все продукты и самостоятельно фильтруем
   const filteredProducts = query
     ? products
         .filter((product) => product.name.toLocaleLowerCase().includes(query))
