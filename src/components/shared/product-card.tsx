@@ -16,7 +16,7 @@ type Props = {
 export function ProductCard({ id, name, price, imageUrl, className }: Props) {
   return (
     <article className={className}>
-      <Link href={`/products/${id}`}>
+      <Link href={`/product/${id}`}>
         <div className="h-[260px ] flex justify-center rounded-lg bg-secondary p-6">
           <Image src={imageUrl} alt={name} width={200} height={200} />
         </div>
