@@ -29,6 +29,7 @@ export default function Home() {
               <ProductsGroupList
                 title="Пиццы"
                 categoryId={0}
+                className="scroll-mt-[92px]"
                 products={[
                   {
                     id: 0,
@@ -84,6 +85,7 @@ export default function Home() {
               <ProductsGroupList
                 title="Салаты"
                 categoryId={1}
+                className="scroll-mt-[92px]"
                 products={[
                   {
                     id: 0,
@@ -139,6 +141,7 @@ export default function Home() {
               <ProductsGroupList
                 title="Напитки"
                 categoryId={2}
+                className="scroll-mt-[92px]"
                 products={[
                   {
                     id: 0,
