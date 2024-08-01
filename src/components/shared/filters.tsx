@@ -9,6 +9,7 @@ import { Input } from "@/components/ui";
 import { useFilterIngredients } from "@/hooks/useFilterIngredients";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { useSet } from "react-use";
 
 type Props = {
   className?: string;
@@ -20,11 +21,16 @@ type PriceProps = {
 };
 
 export function Filters({ className }: Props) {
-  const { ingredients, loading, selectedIds, toggleId } =
+  const { ingredients, loading, selectedIngredients, toggleId } =
     useFilterIngredients();
+  // TODO перенести useSet в отдельный хук как с ингридиентами
+  const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
+  const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(
+    new Set<string>([]),
+  );
   const [prices, setPrices] = React.useState<PriceProps>({
     priceFrom: 0,
-    priceTo: 5000,
+    priceTo: 1000,
   });
   const cutIngredients = ingredients.map((ingredient) => ({
     text: ingredient.name,
@@ -37,23 +43,42 @@ export function Filters({ className }: Props) {
       [name]: value,
     });
   };
-  const updatePrices = (prices: number[]){
-    setPrices()
-  }
+  const updatePrices = (prices: number[]) => {
+    setPrices({
+      priceFrom: prices[0],
+      priceTo: prices[1],
+    });
+  };
+  React.useEffect(() => {
+    console.log({ prices, sizes, pizzaTypes, selectedIngredients });
+  }, [prices, sizes, pizzaTypes, selectedIngredients]);
+
   return (
     <div className={cn("", className)}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
 
       {/* Верхние чекбоксы */}
-    
-{/* TODO доделать эти чекбоксы */}
+      <CheckboxFiltersGroup
+        title="Тип теста"
+        name="pizzaTypes"
+        className="mb-5"
+        // onClickCheckbox={filters.setpizzaTypes}
+        // selected={filters.pizzaTypes}
+        selected={pizzaTypes}
+        onClickCheckbox={togglePizzaTypes}
+        items={[
+          { text: "Тонкое", value: "1" },
+          { text: "Традиционное", value: "2" },
+        ]}
+      />
       <CheckboxFiltersGroup
         title="Размеры"
         name="sizes"
         className="mb-5"
-
         // onClickCheckbox={filters.setSizes}
         // selected={filters.sizes}
+        selected={sizes}
+        onClickCheckbox={toggleSizes}
         items={[
           { text: "20 см", value: "20" },
           { text: "30 см", value: "30" },
@@ -61,6 +86,7 @@ export function Filters({ className }: Props) {
         ]}
       />
       {/* Цена */}
+      {/* TODO на данный момент в инпут можно ввести число больше лимита и из-за этого слайдер улетает вправо */}
       <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
         <p className="mb-3 font-bold">Цена от и до:</p>
         <div className="mb-5 flex gap-3">
@@ -97,10 +123,9 @@ export function Filters({ className }: Props) {
         className="mt-5"
         limit={6}
         items={cutIngredients}
-        defaultItems={cutIngredients}
         loading={loading}
         onClickCheckbox={toggleId}
-        selectedIds={selectedIds}
+        selected={selectedIngredients}
       />
     </div>
   );
