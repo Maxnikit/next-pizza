@@ -8,6 +8,7 @@ import {
 import { Input } from "@/components/ui";
 import { useFilters } from "@/hooks/use-filters";
 import { useIngredients } from "@/hooks/use-ingredients";
+import { useQueryFilters } from "@/hooks/use-query-filters";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { useSet } from "react-use";
@@ -24,6 +25,8 @@ type PriceProps = {
 export function Filters({ className }: Props) {
   const { ingredients, loading } = useIngredients();
   const filters = useFilters();
+
+  useQueryFilters(filters);
 
   const ingredientsToShow = ingredients.map((ingredient) => ({
     text: ingredient.name,
