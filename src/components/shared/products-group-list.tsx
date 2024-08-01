@@ -32,7 +32,7 @@ export function ProductsGroupList({
       setActiveCategoryId(categoryId);
     }
   }, [intersection?.isIntersecting, categoryId, setActiveCategoryId]);
-
+  console.log(products);
   return (
     <div className={className} id={title} ref={intersectionRef}>
       <Title text={title} size="lg" className="mb-5 font-extrabold" />
@@ -43,7 +43,7 @@ export function ProductsGroupList({
             id={product.id}
             name={product.name}
             imageUrl={product.imageUrl}
-            price={product.items[0].price}
+            price={product.variations[0].price}
           />
         ))}
       </div>
