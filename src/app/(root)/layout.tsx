@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "Проект для заказа пиццы на Next.js",
 };
 
-export default function RootLayout({
+export default function HomeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
