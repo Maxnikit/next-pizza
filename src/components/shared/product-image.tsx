@@ -21,6 +21,7 @@ export function ProductImage({ src, className, alt, size }: Props) {
         src={src}
         alt={alt}
         // TODO: remove hardcoded size. Right now it wont work without it
+        priority={true}
         width={500}
         height={500}
         className={cn(
