@@ -38,7 +38,7 @@ export default async function ProductPage({ params: { id } }: Props) {
             a voluptates suscipit exercitationem. Quos ea totam laborum quaerat
             dolorem fugit temporibus animi.
           </p>
-
+          {/* TODO get variants from api */}
           <VariantSelector
             selectedValue="1"
             items={[
