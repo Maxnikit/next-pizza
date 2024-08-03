@@ -15,6 +15,7 @@ export function ChoosePizzaForm({ className, product, onClickAdd }: Props) {
   const totalPrice = 350;
   return (
     <div className={cn("flex flex-1", className)}>
+      {/* TODO remove hardcoded size */}
       <ProductImage src={product.imageUrl} size={30} alt={product.name} />
 
       <div className="w-[490px] bg-[#f7f6f5] p-7">
