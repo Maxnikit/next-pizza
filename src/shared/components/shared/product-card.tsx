@@ -1,5 +1,5 @@
-import { Title } from "@/components/shared";
-import { Button } from "@/components/ui";
+import { Title } from "@/shared/components/shared";
+import { Button } from "@/shared/components/ui";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

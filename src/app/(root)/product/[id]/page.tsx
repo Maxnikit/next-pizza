@@ -3,7 +3,7 @@ import {
   ProductImage,
   Title,
   VariantSelector,
-} from "@/components/shared";
+} from "@/shared/components/shared";
 import { prisma } from "@/prisma/prisma-client";
 import { notFound } from "next/navigation";
 import React from "react";

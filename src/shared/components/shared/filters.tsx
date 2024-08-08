@@ -4,11 +4,11 @@ import {
   FilterCheckbox,
   RangeSlider,
   Title,
-} from "@/components/shared";
-import { Input } from "@/components/ui";
-import { useFilters } from "@/hooks/use-filters";
-import { useIngredients } from "@/hooks/use-ingredients";
-import { useQueryFilters } from "@/hooks/use-query-filters";
+} from "@/shared/components/shared";
+import { Input } from "@/shared/components/ui";
+import { useFilters } from "@/shared/hooks/use-filters";
+import { useIngredients } from "@/shared/hooks/use-ingredients";
+import { useQueryFilters } from "@/shared/hooks/use-query-filters";
 import { cn } from "@/shared/lib/utils";
 import React from "react";
 import { useSet } from "react-use";

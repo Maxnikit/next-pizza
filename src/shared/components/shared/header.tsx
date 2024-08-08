@@ -1,5 +1,5 @@
-import { Container, SearchInput } from "@/components/shared";
-import { Button } from "@/components/ui";
+import { Container, SearchInput } from "@/shared/components/shared";
+import { Button } from "@/shared/components/ui";
 
 import { cn } from "@/shared/lib/utils";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";

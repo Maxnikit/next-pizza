@@ -1,5 +1,9 @@
-import { Title, VariantSelector, ProductImage } from "@/components/shared";
-import { Button } from "@/components/ui";
+import {
+  Title,
+  VariantSelector,
+  ProductImage,
+} from "@/shared/components/shared";
+import { Button } from "@/shared/components/ui";
 import { cn } from "@/shared/lib/utils";
 import { Product } from "@prisma/client";
 import Image from "next/image";

@@ -3,8 +3,8 @@
 import {
   FilterCheckbox,
   FilterCheckboxProps,
-} from "@/components/shared/filter-checkbox";
-import { Input, Skeleton } from "@/components/ui";
+} from "@/shared/components/shared/filter-checkbox";
+import { Input, Skeleton } from "@/shared/components/ui";
 import React from "react";
 
 type Item = FilterCheckboxProps;

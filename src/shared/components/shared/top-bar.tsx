@@ -1,6 +1,6 @@
 import { cn } from "@/shared/lib/utils";
 import React from "react";
-import { Categories, Container, SortPopup } from "@/components/shared";
+import { Categories, Container, SortPopup } from "@/shared/components/shared";
 import { Category } from "@prisma/client";
 // import { Category } from "@prisma/client";
 

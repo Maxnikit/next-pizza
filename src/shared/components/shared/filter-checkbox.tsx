@@ -1,4 +1,4 @@
-import { Checkbox } from "@/components/ui";
+import { Checkbox } from "@/shared/components/ui";
 import React from "react";
 
 export type FilterCheckboxProps = {
@@ -24,12 +24,12 @@ export function FilterCheckbox({
         onCheckedChange={onCheckedChange}
         checked={checked}
         value={value}
-        className="rounded-[8px] w-6 h-6"
+        className="h-6 w-6 rounded-[8px]"
         id={`checkbox-${String(name)}-${String(value)}`}
       />
       <label
         htmlFor={`checkbox-${String(name)}-${String(value)}`}
-        className="leading-none cursor-pointer flex-1"
+        className="flex-1 cursor-pointer leading-none"
       >
         {text}
       </label>

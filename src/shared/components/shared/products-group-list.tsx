@@ -1,5 +1,5 @@
 "use client";
-import { ProductCard, Title } from "@/components/shared";
+import { ProductCard, Title } from "@/shared/components/shared";
 import { cn } from "@/shared/lib/utils";
 import { useIntersection } from "react-use";
 import React from "react";

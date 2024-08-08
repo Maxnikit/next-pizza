@@ -1,5 +1,5 @@
 import React from "react";
-import { Filters } from "@/hooks/use-filters";
+import { Filters } from "@/shared/hooks/use-filters";
 import qs from "qs";
 import { useRouter } from "next/navigation";
 
