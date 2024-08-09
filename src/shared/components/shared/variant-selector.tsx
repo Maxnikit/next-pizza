@@ -5,7 +5,7 @@ import React from "react";
 type Variant = {
   name: string;
   value: string;
-  disabled?: string;
+  disabled?: boolean;
 };
 type Props = {
   items: readonly Variant[];

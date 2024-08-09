@@ -18,3 +18,4 @@ export { VariantSelector } from "./variant-selector";
 export { ChooseProductForm } from "./choose-product-form";
 export { ChoosePizzaForm } from "./choose-pizza-form";
 export {} from "./modals";
+export { Ingredient } from "./ingredient";
