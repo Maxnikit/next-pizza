@@ -13,6 +13,7 @@ import {
   PizzaType,
   pizzaTypes,
 } from "@/shared/constants/pizza";
+import { calcTotalPizzaPrice } from "@/shared/lib/calc-total-pizza-price";
 import { cn } from "@/shared/lib/utils";
 import { Product } from "@prisma/client";
 import Image from "next/image";
@@ -25,7 +26,19 @@ type Props = {
   className?: string;
 };
 
-export function ChoosePizzaForm({ className, product, onClickAddCart }: Props) {
+/**
+ * Renders a form for choosing a pizza with specific size and type, along with selected ingredients.
+ * @param props - The component props.
+ * @param props.className - The class name for the component.
+ * @param props.product - The product with its variations and ingredients.
+ * @param props.onClickAddCart - The function to handle the click event of the add to cart button.
+ * @returns The JSX element representing the form.
+ */
+export function ChoosePizzaForm({
+  className,
+  product,
+  onClickAddCart,
+}: Props): JSX.Element {
   const [size, setSize] = React.useState<PizzaSize>(20);
   const [type, setType] = React.useState<PizzaType>(1);
 
@@ -33,18 +46,44 @@ export function ChoosePizzaForm({ className, product, onClickAddCart }: Props) {
     new Set<number>([]),
   );
 
-  // TODO возможен случай, когда у пиццы нет некоторых вариаций. Убрать в конце 0 и сделать вместо него недоступные вариации недоступными для клика
-  const pizzaPrice =
-    product.variations.find(
-      (variation) => variation.pizzaType === type && variation.size === size,
-    )?.price || 9999132132139;
+  const [totalPrice, setTotalPrice] = React.useState<number | null>(null);
+  const previousPrice = React.useRef<number | null>(null);
 
-  const totalIngredientsPrice = product.ingredients
-    .filter((ingredient) => selectedIngredientsIds.has(ingredient.id))
-    .reduce((acc, ingredient) => acc + ingredient.price, 0);
+  React.useEffect(() => {
+    const newTotalPrice = calcTotalPizzaPrice(
+      product,
+      type,
+      size,
+      selectedIngredientsIds,
+    );
 
-  // TODO get data from api
-  const totalPrice = pizzaPrice + totalIngredientsPrice;
+    if (newTotalPrice !== null) {
+      setTotalPrice(newTotalPrice);
+      previousPrice.current = newTotalPrice;
+    }
+  }, [product, type, size, selectedIngredientsIds]);
+
+  const filteredVariationsByType = product.variations.filter(
+    (variation) => variation.pizzaType === type,
+  );
+  const availableSizes = pizzaSizes.map((item) => ({
+    name: item.name,
+    value: item.value,
+    disabled: !filteredVariationsByType.some(
+      (variation) => variation.size === Number(item.value),
+    ),
+  }));
+
+  React.useEffect(() => {
+    const isCurrentSizeAvailable = availableSizes.find(
+      (item) => Number(item.value) === size && !item.disabled,
+    );
+    const newAvailableSize = availableSizes.find((item) => !item.disabled);
+
+    if (!isCurrentSizeAvailable && newAvailableSize) {
+      setSize(Number(newAvailableSize.value) as PizzaSize);
+    }
+  }, [type, availableSizes, size, totalPrice]);
 
   const handleClickAddCart = () => {
     onClickAddCart?.();
@@ -56,27 +95,6 @@ export function ChoosePizzaForm({ className, product, onClickAddCart }: Props) {
     });
   };
 
-  const availableVariationsByType = product.variations.filter(
-    (variation) => variation.pizzaType === type,
-  );
-  const availableSizes = pizzaSizes.map((item) => ({
-    name: item.name,
-    value: item.value,
-    disabled: !availableVariationsByType.some(
-      (variation) => variation.size === Number(item.value),
-    ),
-  }));
-
-  React.useEffect(() => {
-    const isCurrentSizeAvailable = availableSizes?.find(
-      (item) => Number(item.value) === size && !item.disabled,
-    );
-    const newAvailableSize = availableSizes?.find((item) => !item.disabled);
-
-    if (!isCurrentSizeAvailable && newAvailableSize) {
-      setSize(Number(newAvailableSize.value) as PizzaSize);
-    }
-  }, [type, availableSizes, size]);
   return (
     <div className={cn("flex flex-1", className)}>
       <PizzaImage src={product.imageUrl} alt={product.name} size={size} />
@@ -89,12 +107,12 @@ export function ChoosePizzaForm({ className, product, onClickAddCart }: Props) {
           <VariantSelector
             items={pizzaTypes}
             selectedValue={String(type)}
-            onClick={(value) => setType(Number(value) as PizzaType)}
+            onClick={(value) => setType(Number(value))}
           />
           <VariantSelector
             items={availableSizes}
             selectedValue={String(size)}
-            onClick={(value) => setSize(Number(value) as PizzaSize)}
+            onClick={(value) => setSize(Number(value))}
           />
         </div>
 
