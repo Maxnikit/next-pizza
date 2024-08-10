@@ -141,6 +141,12 @@ export const products = [
     categoryId: 2,
   },
   {
+    name: "Ролл с креветкой 🦐",
+    imageUrl:
+      "https://sushitime.club/image/sushitime/cache/catalog/2021/roll/Philadelphia%20s%20krevetkoy-1000x700.png?v=1626344477",
+    categoryId: 3,
+  },
+  {
     name: "Дэнвич ветчина и сыр",
     imageUrl:
       "https://media.dodostatic.net/image/r:292x292/11EE796FF0059B799A17F57A9E64C725.webp",
@@ -171,6 +177,12 @@ export const products = [
     categoryId: 3,
   },
   {
+    name: "Клубничный молочный коктейль 🍓",
+    imageUrl:
+      "https://media.dodostatic.net/image/r:584x584/11EE796FCA343B7A9D7AB34E922319CC.avif",
+    categoryId: 4,
+  },
+  {
     name: "Банановый молочный коктейль",
     imageUrl:
       "https://media.dodostatic.net/image/r:292x292/11EEE20B8772A72A9B60CFB20012C185.webp",
@@ -194,6 +206,7 @@ export const products = [
       "https://media.dodostatic.net/image/r:292x292/11EE796F93FB126693F96CB1D3E403FB.webp",
     categoryId: 4,
   },
+
   {
     name: "Ирландский Капучино",
     imageUrl:
