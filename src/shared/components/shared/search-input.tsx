@@ -31,7 +31,7 @@ export function SearchInput({ className }: Props) {
       }
     },
     250,
-    [searchQuery],
+    [searchQuery, focused],
   );
 
   const onClickItem = () => {
