@@ -109,12 +109,12 @@ export function ChoosePizzaForm({
           <VariantSelector
             items={pizzaTypes}
             selectedValue={String(type)}
-            onClick={(value) => setType(Number(value))}
+            onClick={(value) => setType(Number(value) as PizzaType)}
           />
           <VariantSelector
             items={availableSizes}
             selectedValue={String(size)}
-            onClick={(value) => setSize(Number(value))}
+            onClick={(value) => setSize(Number(value) as PizzaSize)}
           />
         </div>
 
