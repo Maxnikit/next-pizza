@@ -149,7 +149,7 @@ export const products = [
   {
     name: "Ролл с креветкой 🦐",
     imageUrl:
-      "https://sushitime.club/image/sushitime/cache/catalog/2021/roll/Philadelphia%20s%20krevetkoy-1000x700.png?v=1626344477",
+      "https://cdn.jsdelivr.net/gh/Maxnikit/next-pizza/public/products/krevetka.webp",
     categoryId: 3,
   },
   {
