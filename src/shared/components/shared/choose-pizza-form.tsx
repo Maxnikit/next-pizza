@@ -1,3 +1,5 @@
+"use client";
+
 import { ProductWithRelations } from "@/@types/prisma";
 import {
   Title,
@@ -13,7 +15,7 @@ import {
   PizzaType,
   pizzaTypes,
 } from "@/shared/constants/pizza";
-import { calcTotalPizzaPrice } from "@/shared/lib/calc-total-pizza-price";
+import { calcTotalPizzaPrice } from "@/shared/lib";
 import { cn } from "@/shared/lib/utils";
 import { Product } from "@prisma/client";
 import Image from "next/image";

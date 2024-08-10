@@ -1,3 +1,4 @@
+import { ProductForm } from "@/shared/components/shared/product-form";
 export { Header } from "./header";
 export { Container } from "./container";
 export { Title } from "./title";
@@ -17,5 +18,6 @@ export { PizzaImage } from "./pizza-image";
 export { VariantSelector } from "./variant-selector";
 export { ChooseProductForm } from "./choose-product-form";
 export { ChoosePizzaForm } from "./choose-pizza-form";
+export { ProductForm } from "./product-form";
 export {} from "./modals";
 export { Ingredient } from "./ingredient";

@@ -5,12 +5,14 @@ import {
   ChooseProductForm,
   Title,
 } from "@/shared/components/shared";
+import { ProductForm } from "@/shared/components/shared/product-form";
 import { Dialog } from "@/shared/components/ui";
 import {
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from "@/shared/components/ui/dialog";
+import { isPizza } from "@/shared/lib";
 import { cn } from "@/shared/lib/utils";
 import { Product } from "@prisma/client";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
@@ -25,7 +27,7 @@ type Props = {
 export function ChooseProductModal({ product, className }: Props) {
   const router = useRouter();
 
-  const isPizzaForm = Boolean(product.variations[0].pizzaType);
+  const isPizzaForm = isPizza(product);
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -42,11 +44,7 @@ export function ChooseProductModal({ product, className }: Props) {
           </DialogDescription>
         </VisuallyHidden>
 
-        {isPizzaForm ? (
-          <ChoosePizzaForm product={product} />
-        ) : (
-          <ChooseProductForm product={product} />
-        )}
+        <ProductForm product={product} />
       </DialogContent>
     </Dialog>
   );

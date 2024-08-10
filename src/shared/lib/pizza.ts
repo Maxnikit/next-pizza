@@ -30,3 +30,7 @@ export const calcTotalPizzaPrice = (
 
   return variationPrice + totalIngredientsPrice;
 };
+
+export const isPizza = (product: ProductWithRelations): boolean => {
+  return Boolean(product.variations[0].pizzaType);
+};
