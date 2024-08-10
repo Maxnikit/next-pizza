@@ -15,7 +15,13 @@ export const categories = [
     name: "Напитки",
   },
 ];
-
+export const descriptions = [
+  {
+    name: "Вкусная, сочная, крутая!",
+  },
+  { name: "Освежает как никогда прежде!" },
+  { name: "Попробовать каждому!" },
+];
 export const _ingredients = [
   {
     name: "Сырный бортик",

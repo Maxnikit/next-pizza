@@ -1,10 +1,18 @@
 import { prisma } from "./prisma-client";
 import { hashSync } from "bcrypt";
-import { categories, _ingredients, products } from "./constants";
+import { categories, _ingredients, products, descriptions } from "./constants";
 import { Prisma } from "@prisma/client";
 
-const randomDecimalNumber = (min: number, max: number) => {
+const getRandomDecimalNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
+};
+
+type Description = {
+  name: string;
+};
+
+const getRandomDescription = (array: Description[]) => {
+  return array[Math.floor(Math.random() * array.length)].name;
 };
 
 const generateProductVariation = ({
@@ -15,12 +23,14 @@ const generateProductVariation = ({
   productId: number;
   pizzaType?: 1 | 2;
   size?: 20 | 30 | 40;
+  description?: string;
 }) => {
   return {
     productId,
-    price: randomDecimalNumber(190, 600),
+    price: getRandomDecimalNumber(190, 600),
     pizzaType,
     size,
+    description: getRandomDescription(descriptions),
   } as Prisma.ProductVariationUncheckedCreateInput;
 };
 

@@ -4,11 +4,12 @@ import { cn } from "@/shared/lib/utils";
 import { useIntersection } from "react-use";
 import React from "react";
 import { useCategoryStore } from "@/shared/store/category";
+import { ProductWithRelations } from "@/@types/prisma";
 
 type Props = {
   title: string;
   //   products: CategoryProducts["products"];
-  products: any[];
+  products: ProductWithRelations[];
   categoryId: number;
   className?: string;
   listClassName?: string;
@@ -32,18 +33,13 @@ export function ProductsGroupList({
       setActiveCategoryId(categoryId);
     }
   }, [intersection?.isIntersecting, categoryId, setActiveCategoryId]);
+  console.log(products);
   return (
     <div className={className} id={title} ref={intersectionRef}>
       <Title text={title} size="lg" className="mb-5 font-extrabold" />
       <div className={cn("grid grid-cols-3 gap-[50px]", listClassName)}>
         {products.map((product, index) => (
-          <ProductCard
-            key={index}
-            id={product.id}
-            name={product.name}
-            imageUrl={product.imageUrl}
-            price={product.variations[0].price}
-          />
+          <ProductCard key={index} product={product} />
         ))}
       </div>
     </div>
