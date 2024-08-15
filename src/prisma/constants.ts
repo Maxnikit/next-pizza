@@ -147,6 +147,24 @@ export const products = [
     categoryId: 2,
   },
   {
+    name: "Кофе Латте",
+    imageUrl:
+      "https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp",
+    categoryId: 2,
+  },
+  {
+    name: "Кофе Латте",
+    imageUrl:
+      "https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp",
+    categoryId: 2,
+  },
+  {
+    name: "Кофе Латте",
+    imageUrl:
+      "https://media.dodostatic.net/image/r:292x292/11EE7D61B0C26A3F85D97A78FEEE00AD.webp",
+    categoryId: 2,
+  },
+  {
     name: "Ролл с креветкой 🦐",
     imageUrl:
       "https://cdn.jsdelivr.net/gh/Maxnikit/next-pizza/public/products/krevetka.webp",

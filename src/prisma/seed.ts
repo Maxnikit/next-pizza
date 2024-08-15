@@ -102,6 +102,42 @@ async function up() {
     },
   });
 
+  const pizza4 = await prisma.product.create({
+    data: {
+      name: "Чоризо фреш",
+      imageUrl:
+        "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
+      categoryId: 1,
+      ingredients: {
+        connect: _ingredients.slice(10, 40),
+      },
+    },
+  });
+
+  const pizza5 = await prisma.product.create({
+    data: {
+      name: "Чоризо фреш",
+      imageUrl:
+        "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
+      categoryId: 1,
+      ingredients: {
+        connect: _ingredients.slice(10, 40),
+      },
+    },
+  });
+
+  const pizza6 = await prisma.product.create({
+    data: {
+      name: "Чоризо фреш",
+      imageUrl:
+        "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
+      categoryId: 1,
+      ingredients: {
+        connect: _ingredients.slice(10, 40),
+      },
+    },
+  });
+
   await prisma.productVariation.createMany({
     data: [
       // Пицца "Пепперони фреш"
@@ -170,6 +206,53 @@ async function up() {
         size: 40,
       }),
 
+      generateProductVariation({
+        productId: pizza4.id,
+        pizzaType: 1,
+        size: 20,
+      }),
+      generateProductVariation({
+        productId: pizza4.id,
+        pizzaType: 2,
+        size: 30,
+      }),
+      generateProductVariation({
+        productId: pizza4.id,
+        pizzaType: 2,
+        size: 40,
+      }),
+
+      generateProductVariation({
+        productId: pizza5.id,
+        pizzaType: 1,
+        size: 20,
+      }),
+      generateProductVariation({
+        productId: pizza5.id,
+        pizzaType: 2,
+        size: 30,
+      }),
+      generateProductVariation({
+        productId: pizza5.id,
+        pizzaType: 2,
+        size: 40,
+      }),
+
+      generateProductVariation({
+        productId: pizza6.id,
+        pizzaType: 1,
+        size: 20,
+      }),
+      generateProductVariation({
+        productId: pizza6.id,
+        pizzaType: 2,
+        size: 30,
+      }),
+      generateProductVariation({
+        productId: pizza6.id,
+        pizzaType: 2,
+        size: 40,
+      }),
       // Остальные продукты
       generateProductVariation({ productId: 1 }),
       generateProductVariation({ productId: 2 }),
@@ -190,6 +273,9 @@ async function up() {
       generateProductVariation({ productId: 17 }),
       generateProductVariation({ productId: 18 }),
       generateProductVariation({ productId: 19 }),
+      generateProductVariation({ productId: 20 }),
+      generateProductVariation({ productId: 21 }),
+      generateProductVariation({ productId: 22 }),
     ],
   });
 

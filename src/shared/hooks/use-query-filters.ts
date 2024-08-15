@@ -1,10 +1,12 @@
 import React from "react";
 import { Filters } from "@/shared/hooks/use-filters";
+import { useHash } from "@/shared/hooks/use-hash.ts";
 import qs from "qs";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export const useQueryFilters = (filters: Filters) => {
   const isMounted = React.useRef(false);
+  const hash = useHash();
   const router = useRouter();
 
   React.useEffect(() => {
@@ -20,7 +22,7 @@ export const useQueryFilters = (filters: Filters) => {
         arrayFormat: "comma",
       });
 
-      router.push(`?${query}`, {
+      router.push(`?query=${query}`, {
         scroll: false,
       });
     }

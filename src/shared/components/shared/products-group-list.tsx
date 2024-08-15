@@ -27,16 +27,17 @@ export function ProductsGroupList({
   const intersection = useIntersection(intersectionRef, {
     threshold: 0.4,
   });
-
+  //? useIntersection работает не очень хорошо если в категории продуктов 3 или меньше продукта(т.е. всего 1 строчка). Тогда он можен перескакивать и пропускать категории. Что с этим делать сейчас я не знаю.
   React.useEffect(() => {
     if (intersection?.isIntersecting) {
       setActiveCategoryId(categoryId);
     }
-  }, [intersection?.isIntersecting, categoryId, setActiveCategoryId]);
-  console.log(products);
+  }, [intersection?.isIntersecting, categoryId, setActiveCategoryId, title]);
+
   return (
     <div className={className} id={title} ref={intersectionRef}>
       <Title text={title} size="lg" className="mb-5 font-extrabold" />
+
       <div className={cn("grid grid-cols-3 gap-[50px]", listClassName)}>
         {products.map((product, index) => (
           <ProductCard key={index} product={product} />

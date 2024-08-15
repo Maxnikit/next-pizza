@@ -31,6 +31,6 @@ export const Title: React.FC<Props> = ({ text, size = "sm", className }) => {
   return React.createElement(
     mapTagBySize[size],
     { className: clsx(mapClassNameBySize[size], className) },
-    text
+    text,
   );
 };

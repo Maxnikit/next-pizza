@@ -28,6 +28,7 @@ export function ProductCard({ product, className }: Props) {
           <Image
             src={product.imageUrl}
             alt={product.name}
+            priority={true}
             width={200}
             height={200}
           />
