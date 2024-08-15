@@ -30,6 +30,7 @@ export function ChooseProductModal({ product, className }: Props) {
   const isPizzaForm = isPizza(product);
 
   return (
+    // TODO FIX если предыдущий URL включал в себя, к примеру, "#Завтрак", то диалоговое окно не будет закрыто при нажатии на крестик
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent
         className={cn(
