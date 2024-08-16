@@ -111,7 +111,7 @@ export const _ingredients = [
     name: "Сладкий перец",
     price: 59,
     imageUrl:
-      "https://cdn.jsdelivr.net/gh/Maxnikit/next-pizza/public/products/sladkiy_perec.webp",
+      "https://cdn.jsdelivr.net/gh/Maxnikit/next-pizza/public/ingredients/sladkiy_perec.webp",
   },
   {
     name: "Кубики брынзы",
