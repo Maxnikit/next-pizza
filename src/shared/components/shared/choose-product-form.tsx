@@ -23,11 +23,12 @@ export function ChooseProductForm({ className, product, onClickAdd }: Props) {
   return (
     <div className={cn("flex flex-1", className)}>
       <ProductImage src={product.imageUrl} alt={product.name} />
-      <div className="w-[490px] bg-[#f7f6f5] p-7">
+      <div className="w-[490px] bg-[#f7f6f5] p-5">
         <Title text={product.name} size="md" className="mb-1 font-extrabold" />
         <p className="text-gray-400">{textDetails}</p>
         {/* TODO get variants from api */}
         <VariantSelector
+          className="mt-3"
           selectedValue="1"
           items={[
             {
@@ -41,7 +42,7 @@ export function ChooseProductForm({ className, product, onClickAdd }: Props) {
           ]}
         />
 
-        <Button className="h-[55px] w-full rounded-[18px] px-10 text-base">
+        <Button className="mt-5 h-[55px] w-full rounded-[18px] px-10 text-base">
           Добавить в корзину за {totalPrice} ₽
         </Button>
       </div>

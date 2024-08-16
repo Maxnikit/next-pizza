@@ -100,12 +100,12 @@ export function ChoosePizzaForm({
   return (
     <div className={cn("flex flex-1", className)}>
       <PizzaImage src={product.imageUrl} alt={product.name} size={size} />
-      <div className="w-[490px] bg-[#f7f6f5] p-7">
+      <div className="w-[490px] bg-[#f7f6f5] p-5">
         <Title text={product.name} size="md" className="mb-1 font-extrabold" />
         <p className="text-gray-400">
           {size} см, {mapPizzaTypes[type].toLocaleLowerCase()} тесто
         </p>
-        <div className="mt-5 flex flex-col gap-4">
+        <div className="mt-3 flex flex-col gap-2">
           <VariantSelector
             items={pizzaTypes}
             selectedValue={String(type)}
@@ -118,7 +118,7 @@ export function ChoosePizzaForm({
           />
         </div>
 
-        <div className="scrollbar mt-5 h-[420px] overflow-auto rounded-md bg-gray-50 p-5">
+        <div className="scrollbar mt-3 h-[420px] overflow-auto rounded-md bg-gray-50 p-5">
           <div className="grid grid-cols-3 gap-3">
             {product.ingredients.map((ingredient) => (
               <Ingredient
@@ -134,7 +134,7 @@ export function ChoosePizzaForm({
         </div>
         <Button
           onClick={handleClickAddCart}
-          className="mt-10 h-[55px] w-full rounded-[18px] px-10 text-base"
+          className="mt-5 h-[55px] w-full rounded-[18px] px-10 text-base"
         >
           Добавить в корзину за {totalPrice} ₽
         </Button>
