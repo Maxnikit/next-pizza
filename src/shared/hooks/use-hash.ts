@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
 export function useHash() {
-  const [hash, setHash] = useState(window.location.hash);
+  // Not adding global.window && will cause error during build
+  const [hash, setHash] = useState(global.window && window.location.hash);
 
   useEffect(() => {
     const onHashChange = () => {
