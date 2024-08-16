@@ -35,7 +35,7 @@ export function ProductCard({ product, className }: Props) {
         </div>
 
         <Title text={product.name} size="sm" className="mb-1 mt-3 font-bold" />
-        {/* TODO get all data from API */}
+
         <p className="text-sm text-gray-400">{productDescription}</p>
 
         <div className="mt-4 flex items-center justify-between">

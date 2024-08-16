@@ -10,7 +10,6 @@ type Props = {
   cats: Category[];
   className?: string;
 };
-// TODO get categories from API inside top-bar.tsx
 export function Categories({ cats, className }: Props) {
   const activeIndex = useCategoryStore((state) => state.activeId);
   const hash = useHash();
