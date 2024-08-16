@@ -23,7 +23,7 @@ export function ProductCard({ product, className }: Props) {
 
   return (
     <article className={className}>
-      <Link href={`/product/${product.id}`}>
+      <Link scroll={false} href={`/product/${product.id}`}>
         <div className="flex h-[260px] justify-center rounded-lg bg-secondary p-6">
           <Image
             src={product.imageUrl}
