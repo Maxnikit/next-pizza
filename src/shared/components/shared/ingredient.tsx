@@ -26,7 +26,7 @@ export function Ingredient({
   return (
     <button
       className={cn(
-        "relative flex w-32 cursor-pointer flex-col items-center rounded-md border border-transparent bg-white p-1 text-center shadow-md",
+        "relative flex cursor-pointer flex-col items-center rounded-md border border-transparent bg-white p-1 text-center shadow-md",
         { "border-primary": active },
         className,
       )}
