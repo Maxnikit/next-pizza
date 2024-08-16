@@ -17,7 +17,7 @@ import { cn } from "@/shared/lib/utils";
 import { Product } from "@prisma/client";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type Props = {
   product: ProductWithRelations;
@@ -27,10 +27,9 @@ type Props = {
 export function ChooseProductModal({ product, className }: Props) {
   const router = useRouter();
 
-  const isPizzaForm = isPizza(product);
-
   return (
-    // TODO FIX если предыдущий URL включал в себя, к примеру, "#Завтрак", то диалоговое окно не будет закрыто при нажатии на крестик
+    // TODO FIX если предыдущий URL включал в себя хэш-тег, к примеру, "#Завтрак", то диалоговое окно не будет закрыто при router.back()
+    // https://github.com/vercel/next.js/issues/56112
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent
         className={cn(
