@@ -1,4 +1,7 @@
 import { ProductWithRelations } from "@/@types/prisma";
+import { Variant } from "@/shared/components/shared/variant-selector";
+import { pizzaSizes, PizzaType } from "@/shared/constants/pizza";
+import { ProductVariation } from "@prisma/client";
 
 /**
  * Calculates the total price of a pizza based on its type, size, and selected ingredients.
@@ -33,4 +36,22 @@ export const calcTotalPizzaPrice = (
 
 export const isPizza = (product: ProductWithRelations): boolean => {
   return Boolean(product.variations[0].pizzaType);
+};
+
+export const getAvailablePizzaSizes = (
+  product: ProductWithRelations,
+  type: PizzaType,
+): Variant[] => {
+  const filteredVariationsByType = product.variations.filter(
+    (variation) => variation.pizzaType === type,
+  );
+  const availableSizes = pizzaSizes.map((item) => ({
+    name: item.name,
+    value: item.value,
+    disabled: !filteredVariationsByType.some(
+      (variation) => variation.size === Number(item.value),
+    ),
+  }));
+
+  return availableSizes;
 };
