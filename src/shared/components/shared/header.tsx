@@ -1,4 +1,4 @@
-import { Container, SearchInput } from "@/shared/components/shared";
+import { CartButton, Container, SearchInput } from "@/shared/components/shared";
 import { Button } from "@/shared/components/ui";
 
 import { cn } from "@/shared/lib/utils";
@@ -38,20 +38,7 @@ export function Header({ className }: Props) {
             Войти
           </Button>
 
-          <div>
-            <Button className="group relative">
-              <b>5220 ₽</b>
-              <span className="mx-3 h-full w-[1px] bg-white/30" />
-              <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
-                <ShoppingCart className="relative" size={16} strokeWidth={2} />
-                <b>3</b>
-              </div>
-              <ArrowRight
-                size={20}
-                className="absolute right-5 -translate-x-2 opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-              />
-            </Button>
-          </div>
+          <CartButton />
         </div>
       </Container>
     </header>
