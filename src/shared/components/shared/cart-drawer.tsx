@@ -9,10 +9,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/shared/components/ui/sheet";
-import { cn } from "@/shared/lib";
+import { cn, getCartItemDetails } from "@/shared/lib";
+import { useCartStore } from "@/shared/store/cart";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 
 type Props = {
   className?: string;
@@ -21,6 +22,14 @@ type Props = {
 
 const totalAmount = 500;
 export function CartDrawer({ children, className }: Props) {
+  const fetchCartItems = useCartStore((state) => state.fetchCartItems);
+  const totalAmount = useCartStore((state) => state.totalAmount);
+  const items = useCartStore((state) => state.items);
+
+  useEffect(() => {
+    fetchCartItems();
+  }, [fetchCartItems]);
+
   return (
     <div className={cn("", className)}>
       <Sheet>
@@ -34,14 +43,25 @@ export function CartDrawer({ children, className }: Props) {
           </SheetHeader>
           <div className="-mx-6 mt-5 flex flex-1 flex-col gap-2 overflow-auto">
             {/* TODO get cart items from backend */}
-            <CartDrawerItem
-              id={1}
-              imageUrl=""
-              details="detailsPLACEHOLDER"
-              name={"NAMEPLACE"}
-              price={500}
-              quantity={1}
-            />
+            {items.map((item) => (
+              <CartDrawerItem
+                key={item.id}
+                id={item.id}
+                imageUrl={item.imageUrl}
+                details={
+                  item.pizzaSize && item.pizzaType && item.ingredients
+                    ? getCartItemDetails(
+                        item.pizzaSize,
+                        item.pizzaType,
+                        item.ingredients,
+                      )
+                    : "Placeholder: This item is not Pizza!"
+                }
+                name={item.name}
+                price={item.price}
+                quantity={item.quantity}
+              />
+            ))}
           </div>
 
           <SheetFooter className="-mx-6 bg-white p-8">
