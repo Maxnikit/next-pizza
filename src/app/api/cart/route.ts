@@ -23,5 +23,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(userCart);
   } catch (error) {
     console.log(error);
+    return NextResponse.json(
+      { error: "An error occurred while fetching the cart" },
+      { status: 500 },
+    );
   }
 }

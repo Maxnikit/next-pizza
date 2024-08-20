@@ -61,3 +61,5 @@ test("Gets correct totalPrice for cartItem", () => {
   const totalPrice = calcCartItemTotalPrice(item);
   expect(totalPrice).toBe(1700);
 });
+
+// TODO Write more tests

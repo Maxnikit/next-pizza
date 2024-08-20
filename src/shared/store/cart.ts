@@ -1,4 +1,5 @@
 import { getCartDetails } from "@/shared/lib";
+import { CartStateItem } from "@/shared/lib/get-cart-details";
 import { Api } from "@/shared/services/api-client";
 import { create } from "zustand";
 
