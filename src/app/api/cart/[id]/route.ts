@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/prisma/prisma-client";
 import { updateCartTotalPrice } from "@/shared/lib/update-cart-total-price";
+
 export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } },
@@ -34,7 +35,7 @@ export async function PATCH(
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "An error occurred while updating the cart" },
+      { error: `An error occurred while updating the cart: ${error}` },
       { status: 500 },
     );
   }
