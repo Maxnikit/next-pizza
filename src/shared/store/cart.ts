@@ -10,10 +10,10 @@ export type CartState = {
   items: CartStateItem[];
 
   fetchCartItems: () => Promise<void>;
-  updateItemQuantity: (id: number, quantity: number) => Promise<void>;
+  updateItemQuantity: (cartItemId: number, quantity: number) => Promise<void>;
   // TODO change any
   addCartItem: (values: any) => Promise<void>;
-  removeCartItem: (id: number) => Promise<void>;
+  removeCartItem: (cartItemId: number) => Promise<void>;
 };
 
 export const useCartStore = create<CartState>((set, get) => ({
@@ -25,7 +25,7 @@ export const useCartStore = create<CartState>((set, get) => ({
   fetchCartItems: async () => {
     try {
       set({ loading: true, error: false });
-      const data = await Api.cart.fetchCart();
+      const data = await Api.cart.getCart();
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
@@ -35,9 +35,29 @@ export const useCartStore = create<CartState>((set, get) => ({
     }
   },
 
-  removeCartItem: async (id: number) => {},
-
-  updateItemQuantity: async (id: number, quantity: number) => {},
-
+  updateItemQuantity: async (cartItemId: number, quantity: number) => {
+    try {
+      set({ loading: true, error: false });
+      const data = await Api.cart.updateItemQuantity(cartItemId, quantity);
+      set(getCartDetails(data));
+    } catch (error) {
+      console.error(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
+  removeCartItem: async (cartItemId: number) => {
+    try {
+      set({ loading: true, error: false });
+      const data = await Api.cart.removeCartItem(cartItemId);
+      set(getCartDetails(data));
+    } catch (error) {
+      console.error(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
   addCartItem: async (values: any) => {},
 }));

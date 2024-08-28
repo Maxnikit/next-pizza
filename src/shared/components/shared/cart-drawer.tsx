@@ -25,10 +25,21 @@ export function CartDrawer({ children, className }: Props) {
   const fetchCartItems = useCartStore((state) => state.fetchCartItems);
   const totalAmount = useCartStore((state) => state.totalAmount);
   const items = useCartStore((state) => state.items);
+  const updateItemQuantity = useCartStore((state) => state.updateItemQuantity);
+  const removeCartItem = useCartStore((state) => state.removeCartItem);
 
   useEffect(() => {
     fetchCartItems();
   }, [fetchCartItems]);
+
+  const onClickCountButton = (
+    cartItemId: number,
+    quantity: number,
+    type: "plus" | "minus",
+  ) => {
+    const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+    updateItemQuantity(cartItemId, newQuantity);
+  };
 
   return (
     <div className={cn("", className)}>
@@ -45,6 +56,10 @@ export function CartDrawer({ children, className }: Props) {
             {/* TODO get cart items from backend */}
             {items.map((item) => (
               <CartDrawerItem
+                onClickCountButton={(type) =>
+                  onClickCountButton(item.id, item.quantity, type)
+                }
+                onClickDeleteButton={() => removeCartItem(item.id)}
                 key={item.id}
                 id={item.id}
                 imageUrl={item.imageUrl}

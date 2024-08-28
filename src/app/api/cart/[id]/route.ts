@@ -40,3 +40,38 @@ export async function PATCH(
     );
   }
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } },
+) {
+  try {
+    const id = Number(params.id);
+    const token = req.cookies.get("cartToken")?.value;
+
+    if (!token) {
+      return NextResponse.json({ error: "Cart token not found" });
+    }
+
+    const cartItem = await prisma.cartItem.findFirst({
+      where: { id },
+    });
+
+    if (!cartItem) {
+      return NextResponse.json({ error: "Cart item not found" });
+    }
+
+    await prisma.cartItem.delete({
+      where: { id },
+    });
+
+    const updatedUserCart = await updateCartTotalPrice(token);
+    return NextResponse.json(updatedUserCart);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: `An error occurred while deleting cart item: ${error}` },
+      { status: 500 },
+    );
+  }
+}
