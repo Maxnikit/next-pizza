@@ -4,6 +4,7 @@ import { Button } from "@/shared/components/ui";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -14,6 +15,7 @@ import { useCartStore } from "@/shared/store/cart";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React, { ReactNode, useEffect } from "react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 type Props = {
   className?: string;
@@ -47,6 +49,9 @@ export function CartDrawer({ children, className }: Props) {
         <SheetTrigger asChild>{children}</SheetTrigger>
 
         <SheetContent className="flex flex-col justify-between bg-[#F4F1EE] pb-0">
+          <VisuallyHidden>
+            <SheetDescription>This is your cart</SheetDescription>
+          </VisuallyHidden>
           <SheetHeader>
             <SheetTitle>
               В корзине <span className="font-bold">3 товара</span>

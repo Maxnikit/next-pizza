@@ -14,7 +14,13 @@ export const CartItemDetailsImage: React.FC<Props> = ({
 }) => {
   return (
     <div className="relative flex h-[60px] w-[60px]">
-      <Image alt={alt} fill className={cn("", className)} src={src} />
+      <Image
+        alt={alt}
+        sizes="auto"
+        fill
+        className={cn("", className)}
+        src={src}
+      />
     </div>
   );
 };

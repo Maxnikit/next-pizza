@@ -31,6 +31,7 @@ export function ProductCard({ product, className }: Props) {
             priority={true}
             width={200}
             height={200}
+            style={{ width: "auto", height: "auto" }}
           />
         </div>
 

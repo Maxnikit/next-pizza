@@ -13,18 +13,22 @@ interface ReturnProps {
   type: PizzaType;
   selectedIngredientsIds: Set<number>;
   availableSizes: Variant[];
-  totalPrice: number;
+  totalPrice: number | null;
+  currentVariationId?: number;
   setSize: (size: PizzaSize) => void;
   setType: (type: PizzaType) => void;
   addIngredient: (id: number) => void;
 }
-export const usePizzaOptions = (product: ProductWithRelations) => {
+export const usePizzaOptions = (product: ProductWithRelations): ReturnProps => {
   const [size, setSize] = React.useState<PizzaSize>(20);
   const [type, setType] = React.useState<PizzaType>(1);
   const [selectedIngredientsIds, { toggle: addIngredient }] = useSet(
     new Set<number>([]),
   );
   const availableSizes = getAvailablePizzaSizes(product, type);
+  const currentVariationId = product.variations.find(
+    (variation) => variation.pizzaType === type && variation.size === size,
+  )?.id;
   const [totalPrice, setTotalPrice] = React.useState<number | null>(null);
   const previousPrice = React.useRef<number | null>(null);
 
@@ -59,6 +63,7 @@ export const usePizzaOptions = (product: ProductWithRelations) => {
     selectedIngredientsIds,
     availableSizes,
     totalPrice,
+    currentVariationId,
     setSize,
     setType,
     addIngredient,
