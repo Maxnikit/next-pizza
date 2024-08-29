@@ -23,9 +23,9 @@ export function getCartDetails(data: CartDTO): ReturnProps {
       id: item.id,
       quantity: item.quantity,
       name: item.productVariation.product.name,
-      pizzaType: item.productVariation.pizzaType,
       imageUrl: item.productVariation.product.imageUrl,
-      pizzaSize: item.productVariation.size,
+      pizzaSize: item.productVariation.size as 20 | 30 | 40 | null,
+      pizzaType: item.productVariation.pizzaType as 1 | 2 | null,
       price: calcCartItemTotalPrice(item),
       ingredients: item.ingredients.map((ingredient) => ({
         name: ingredient.name,
