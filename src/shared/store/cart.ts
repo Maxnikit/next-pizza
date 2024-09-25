@@ -60,10 +60,12 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ loading: false });
     }
   },
+  // TODO починить баг: добавил пиццу с 3 ингридиентами. После этого если добавить пиццу с 2, то вместо создания новой пиццы, произойдёт +1 на прошлую
   addCartItem: async (values: CreateCartItemValues) => {
     try {
       set({ loading: true, error: false });
       const data = await Api.cart.addCartItem(values);
+
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);

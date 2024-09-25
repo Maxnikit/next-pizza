@@ -12,7 +12,7 @@ import React from "react";
 
 type Props = {
   product: ProductWithRelations;
-  onClickAdd: () => void;
+  onClickAddCart: (variationId: number) => void;
   loading: boolean;
   className?: string;
 };
@@ -20,11 +20,18 @@ type Props = {
 export function ChooseProductForm({
   className,
   product,
-  onClickAdd,
+  onClickAddCart,
   loading,
 }: Props) {
   // TODO get data from api
+  const currentVariationId = product.variations[0].id;
+  const handleClickAddCart = () => {
+    if (!currentVariationId) {
+      return;
+    }
 
+    onClickAddCart(currentVariationId);
+  };
   return (
     <div className={cn("flex flex-1", className)}>
       <ProductImage src={product.imageUrl} alt={product.name} />
@@ -40,7 +47,7 @@ export function ChooseProductForm({
         </div>
         <Button
           loading={loading}
-          onClick={onClickAdd}
+          onClick={handleClickAddCart}
           className="mt-5 h-[55px] w-full rounded-[18px] px-10 text-base"
         >
           Добавить в корзину за {product.variations[0].price} ₽

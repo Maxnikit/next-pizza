@@ -4,6 +4,7 @@ import { ProductWithRelations } from "@/@types/prisma";
 import { ChoosePizzaForm, ChooseProductForm } from "@/shared/components/shared";
 import { isPizza } from "@/shared/lib";
 import { useCartStore } from "@/shared/store/cart";
+import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
 
@@ -17,36 +18,36 @@ export function ProductForm({ product }: Props) {
     state.loading,
   ]);
   const firstVariation = product.variations[0];
+  const router = useRouter();
 
-  const onAddPizza = async (
+  const onSubmit = async (
     productVariationId: number,
-    ingredientsIds: number[],
+    ingredientsIds?: number[],
   ) => {
+    console.log(ingredientsIds);
     try {
-      await addCartItem({
-        productVariationId,
-        ingredientsIds,
-      });
-      toast.success("Продукт добавлен в корзину");
-    } catch (err) {
-      toast.error("Не удалось добавить продукт в корзину");
-      console.error(err);
-    }
-  };
-  const onAddProduct = async () => {
-    try {
-      await addCartItem({ productVariationId: firstVariation.id });
-      toast.success("Продукт добавлен в корзину");
-    } catch (err) {
-      toast.error("Не удалось добавить продукт в корзину");
-      console.error(err);
-    }
-  };
+      if (isPizza(product)) {
+        console.log(1);
+        await addCartItem({
+          productVariationId,
+          ingredientsIds,
+        });
+      } else {
+        console.log(2);
+        await addCartItem({ productVariationId });
+      }
 
+      router.back();
+      toast.success(`${product.name} теперь в корзине!`);
+    } catch (err) {
+      toast.error("Не удалось добавить продукт в корзину");
+      console.error("Error adding product to cart:", err);
+    }
+  };
   if (isPizza(product)) {
     return (
       <ChoosePizzaForm
-        onClickAddCart={onAddPizza}
+        onClickAddCart={onSubmit}
         product={product}
         loading={loading}
       />
@@ -54,7 +55,7 @@ export function ProductForm({ product }: Props) {
   } else {
     return (
       <ChooseProductForm
-        onClickAdd={onAddProduct}
+        onClickAddCart={onSubmit}
         product={product}
         loading={loading}
       />
