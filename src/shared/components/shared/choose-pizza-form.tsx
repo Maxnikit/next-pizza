@@ -21,6 +21,7 @@ import React from "react";
 type Props = {
   product: ProductWithRelations;
   onClickAddCart: (variationId: number, ingredientsIds: number[]) => void;
+  loading: boolean;
   className?: string;
 };
 
@@ -32,9 +33,10 @@ type Props = {
  * @returns The JSX element representing the form.
  */
 export function ChoosePizzaForm({
-  className,
   product,
   onClickAddCart,
+  loading,
+  className,
 }: Props): JSX.Element {
   const {
     size,
@@ -101,6 +103,7 @@ export function ChoosePizzaForm({
           </div>
         </div>
         <Button
+          loading={loading}
           onClick={handleClickAddCart}
           className="mt-5 h-[55px] w-full rounded-[18px] px-10 text-base"
         >

@@ -12,7 +12,10 @@ type Props = {
 };
 
 export function ProductForm({ product }: Props) {
-  const addCartItem = useCartStore((state) => state.addCartItem);
+  const [addCartItem, loading] = useCartStore((state) => [
+    state.addCartItem,
+    state.loading,
+  ]);
   const firstVariation = product.variations[0];
 
   const onAddPizza = async (
@@ -30,13 +33,31 @@ export function ProductForm({ product }: Props) {
       console.error(err);
     }
   };
-  const onAddProduct = () => {
-    addCartItem({ productVariationId: firstVariation.id });
+  const onAddProduct = async () => {
+    try {
+      await addCartItem({ productVariationId: firstVariation.id });
+      toast.success("Продукт добавлен в корзину");
+    } catch (err) {
+      toast.error("Не удалось добавить продукт в корзину");
+      console.error(err);
+    }
   };
 
   if (isPizza(product)) {
-    return <ChoosePizzaForm onClickAddCart={onAddPizza} product={product} />;
+    return (
+      <ChoosePizzaForm
+        onClickAddCart={onAddPizza}
+        product={product}
+        loading={loading}
+      />
+    );
   } else {
-    return <ChooseProductForm onClickAdd={onAddProduct} product={product} />;
+    return (
+      <ChooseProductForm
+        onClickAdd={onAddProduct}
+        product={product}
+        loading={loading}
+      />
+    );
   }
 }

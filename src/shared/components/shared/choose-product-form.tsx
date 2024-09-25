@@ -13,10 +13,16 @@ import React from "react";
 type Props = {
   product: ProductWithRelations;
   onClickAdd: () => void;
+  loading: boolean;
   className?: string;
 };
 
-export function ChooseProductForm({ className, product, onClickAdd }: Props) {
+export function ChooseProductForm({
+  className,
+  product,
+  onClickAdd,
+  loading,
+}: Props) {
   // TODO get data from api
 
   return (
@@ -33,6 +39,7 @@ export function ChooseProductForm({ className, product, onClickAdd }: Props) {
           <p className="text-gray-400">PLACEHOLDER</p>
         </div>
         <Button
+          loading={loading}
           onClick={onClickAdd}
           className="mt-5 h-[55px] w-full rounded-[18px] px-10 text-base"
         >
