@@ -29,6 +29,7 @@ export function CartDrawer({ children, className }: Props) {
   const items = useCartStore((state) => state.items);
   const updateItemQuantity = useCartStore((state) => state.updateItemQuantity);
   const removeCartItem = useCartStore((state) => state.removeCartItem);
+  const cleanCart = useCartStore((state) => state.cleanCart);
 
   useEffect(() => {
     fetchCartItems();
@@ -57,6 +58,7 @@ export function CartDrawer({ children, className }: Props) {
               В корзине <span className="font-bold">3 товара</span>
             </SheetTitle>
           </SheetHeader>
+          <Button onClick={cleanCart}>Очистить корзину</Button>
           <div className="-mx-6 mt-5 flex flex-1 flex-col gap-2 overflow-auto">
             {/* TODO get cart items from backend */}
             {items.map((item) => (

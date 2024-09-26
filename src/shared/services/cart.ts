@@ -32,3 +32,9 @@ export const addCartItem = async (
 
   return data;
 };
+
+export const cleanCart = async (): Promise<CartDTO> => {
+  const { data } = await axiosInstance.delete<CartDTO>("/cart");
+
+  return data;
+};

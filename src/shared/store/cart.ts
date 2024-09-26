@@ -12,6 +12,7 @@ export type CartState = {
 
   fetchCartItems: () => Promise<void>;
   updateItemQuantity: (cartItemId: number, quantity: number) => Promise<void>;
+  cleanCart: () => Promise<void>;
   // TODO change any
   addCartItem: (values: CreateCartItemValues) => Promise<void>;
   removeCartItem: (cartItemId: number) => Promise<void>;
@@ -52,6 +53,18 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       set({ loading: true, error: false });
       const data = await Api.cart.removeCartItem(cartItemId);
+      set(getCartDetails(data));
+    } catch (error) {
+      console.error(error);
+      set({ error: true });
+    } finally {
+      set({ loading: false });
+    }
+  },
+  cleanCart: async () => {
+    try {
+      set({ loading: true, error: false });
+      const data = await Api.cart.cleanCart();
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
