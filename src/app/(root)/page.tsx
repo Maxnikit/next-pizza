@@ -10,19 +10,16 @@ import {
 } from "@/shared/components/shared";
 import { prisma } from "@/prisma/prisma-client";
 import { Suspense } from "react";
+import { findPizzas } from "@/shared/lib";
+import { GetSearchParams } from "@/shared/lib/find-pizzas";
+import { search } from "@/shared/services/products";
 
-export default async function Home() {
-  const categories = await prisma.category.findMany({
-    include: {
-      products: {
-        include: {
-          ingredients: true,
-          variations: true,
-        },
-      },
-    },
-  });
-
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: GetSearchParams;
+}) {
+  const categories = await findPizzas(searchParams);
   return (
     <>
       <Container className="mt-10">
