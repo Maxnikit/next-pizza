@@ -25,3 +25,8 @@ export const pizzaTypes = Object.entries(mapPizzaTypes).map(
 
 export type PizzaSize = keyof typeof mapPizzaSizes;
 export type PizzaType = keyof typeof mapPizzaTypes;
+
+export const defaultPrices = {
+  priceFrom: 0,
+  priceTo: 1000,
+};

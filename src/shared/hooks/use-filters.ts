@@ -1,6 +1,7 @@
 import { useSearchParams } from "next/navigation";
 import { useSet } from "react-use";
 import React from "react";
+import { defaultPrices } from "@/shared/constants/pizza";
 
 interface PriceProps {
   priceFrom?: number;
@@ -52,8 +53,8 @@ export const useFilters = (): ReturnProps => {
   );
 
   const [prices, setPrices] = React.useState<PriceProps>({
-    priceFrom: Number(searchParams.get("priceFrom")) || 0,
-    priceTo: Number(searchParams.get("priceTo")) || 1000,
+    priceFrom: Number(searchParams.get("priceFrom")) || defaultPrices.priceFrom,
+    priceTo: Number(searchParams.get("priceTo")) || defaultPrices.priceTo,
   });
 
   const updatePrice = (name: keyof PriceProps, value: number) => {

@@ -6,6 +6,7 @@ import {
   Title,
 } from "@/shared/components/shared";
 import { Input } from "@/shared/components/ui";
+import { defaultPrices } from "@/shared/constants/pizza";
 import { useFilters } from "@/shared/hooks/use-filters";
 import { useIngredients } from "@/shared/hooks/use-ingredients";
 import { useQueryFilters } from "@/shared/hooks/use-query-filters";
@@ -33,9 +34,17 @@ export function Filters({ className }: Props) {
     value: String(ingredient.id),
   }));
 
+  const handlePriceChange = (name: keyof PriceProps, value: number) => {
+    value = Math.min(
+      defaultPrices.priceTo,
+      Math.max(defaultPrices.priceFrom, value),
+    ); // Ensure value is within the range
+    filters.setPrices(name, value);
+  };
+
   const updatePrices = (prices: number[]) => {
-    filters.setPrices("priceFrom", prices[0]);
-    filters.setPrices("priceTo", prices[1]);
+    handlePriceChange("priceFrom", prices[0]);
+    handlePriceChange("priceTo", prices[1]);
   };
 
   return (
@@ -50,8 +59,8 @@ export function Filters({ className }: Props) {
         onClickCheckbox={filters.setPizzaTypes}
         selected={filters.pizzaTypes}
         items={[
-          { text: "Тонкое", value: "1" },
-          { text: "Традиционное", value: "2" },
+          { text: "Традиционное", value: "1" },
+          { text: "Тонкое", value: "2" },
         ]}
       />
 
@@ -74,37 +83,33 @@ export function Filters({ className }: Props) {
         <div className="mb-5 flex gap-3">
           <Input
             type="number"
-            placeholder="0"
-            min={0}
-            max={1000}
+            placeholder={defaultPrices.priceFrom.toString()}
+            min={defaultPrices.priceFrom}
+            max={defaultPrices.priceTo}
             value={String(filters.prices.priceFrom)}
-            onChange={(e) => {
-              let value = Number(e.target.value);
-              value = Math.min(1000, value);
-              filters.setPrices("priceFrom", value);
-            }}
+            onChange={(e) =>
+              handlePriceChange("priceFrom", Number(e.target.value))
+            }
           />
           <Input
             type="number"
-            placeholder="1000"
+            placeholder={defaultPrices.priceTo.toString()}
             min={100}
-            max={1000}
+            max={defaultPrices.priceTo}
             value={String(filters.prices.priceTo)}
-            onChange={(e) => {
-              let value = Number(e.target.value);
-              value = Math.min(1000, value);
-              filters.setPrices("priceTo", value);
-            }}
+            onChange={(e) =>
+              handlePriceChange("priceTo", Number(e.target.value))
+            }
           />
         </div>
 
         <RangeSlider
-          min={0}
-          max={1000}
-          step={10}
+          min={defaultPrices.priceFrom}
+          max={defaultPrices.priceTo}
+          step={50}
           value={[
-            filters.prices.priceFrom || 0,
-            filters.prices.priceTo || 1000,
+            filters.prices.priceFrom || defaultPrices.priceFrom,
+            filters.prices.priceTo || defaultPrices.priceTo,
           ]}
           onValueChange={updatePrices}
         />

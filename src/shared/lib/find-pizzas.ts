@@ -1,4 +1,6 @@
+import { products } from "./../../prisma/constants";
 import { prisma } from "@/prisma/prisma-client";
+import { defaultPrices } from "@/shared/constants/pizza";
 
 export interface GetSearchParams {
   query?: string;
@@ -10,9 +12,6 @@ export interface GetSearchParams {
   priceTo?: string;
 }
 
-const DEFAULT_MIN_PRICE = 0;
-const DEFAULT_MAX_PRICE = 1000;
-
 export const findPizzas = async (params: GetSearchParams) => {
   const sizes = params.sizes?.split(",").map(Number);
   const pizzaTypes = params.pizzaTypes?.split(",").map(Number);
@@ -20,8 +19,10 @@ export const findPizzas = async (params: GetSearchParams) => {
 
   const minPrice = params.priceFrom
     ? Number(params.priceFrom)
-    : DEFAULT_MIN_PRICE;
-  const maxPrice = params.priceTo ? Number(params.priceTo) : DEFAULT_MAX_PRICE;
+    : defaultPrices.priceFrom;
+  const maxPrice = params.priceTo
+    ? Number(params.priceTo)
+    : defaultPrices.priceTo;
 
   const categories = await prisma.category.findMany({
     include: {
@@ -41,10 +42,10 @@ export const findPizzas = async (params: GetSearchParams) => {
               pizzaType: {
                 in: pizzaTypes,
               },
-              price: {
-                gte: minPrice,
-                lte: maxPrice,
-              },
+              // price: {
+              //   gte: minPrice,
+              //   lte: maxPrice,
+              // },
             },
           },
         },
@@ -65,6 +66,6 @@ export const findPizzas = async (params: GetSearchParams) => {
       },
     },
   });
-
+  console.log(categories);
   return categories;
 };
