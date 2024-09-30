@@ -97,43 +97,43 @@ async function up() {
         "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(10, 40),
+        connect: _ingredients.slice(10, 15),
       },
     },
   });
 
   const pizza4 = await prisma.product.create({
     data: {
-      name: "Чоризо фреш",
+      name: "Карбонара",
       imageUrl:
         "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(10, 40),
+        connect: _ingredients.slice(3, 8),
       },
     },
   });
 
   const pizza5 = await prisma.product.create({
     data: {
-      name: "Чоризо фреш",
+      name: "Цезарь",
       imageUrl:
         "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(10, 40),
+        connect: _ingredients.slice(6, 12),
       },
     },
   });
 
   const pizza6 = await prisma.product.create({
     data: {
-      name: "Чоризо фреш",
+      name: "Гавайская",
       imageUrl:
         "https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp",
       categoryId: 1,
       ingredients: {
-        connect: _ingredients.slice(10, 40),
+        connect: _ingredients.slice(13, 17),
       },
     },
   });
