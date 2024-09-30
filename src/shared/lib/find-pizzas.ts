@@ -42,10 +42,10 @@ export const findPizzas = async (params: GetSearchParams) => {
               pizzaType: {
                 in: pizzaTypes,
               },
-              // price: {
-              //   gte: minPrice,
-              //   lte: maxPrice,
-              // },
+              price: {
+                gte: minPrice,
+                lte: maxPrice,
+              },
             },
           },
         },
@@ -66,6 +66,5 @@ export const findPizzas = async (params: GetSearchParams) => {
       },
     },
   });
-  console.log(categories);
   return categories;
 };
