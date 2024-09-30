@@ -82,6 +82,7 @@ export function CartDrawer({ children, className }: Props) {
                 name={item.name}
                 price={item.price}
                 quantity={item.quantity}
+                disabled={item.disabled}
               />
             ))}
           </div>

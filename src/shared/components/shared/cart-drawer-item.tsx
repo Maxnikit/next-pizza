@@ -23,7 +23,11 @@ export function CartDrawerItem({
   onClickDeleteButton,
 }: Props) {
   return (
-    <div className={cn("flex gap-6 bg-white p-5", className)}>
+    <div
+      className={cn("flex gap-6 bg-white p-5", className, {
+        "pointer-events-none opacity-50": disabled,
+      })}
+    >
       <CartItem.Image src={imageUrl} alt={name} />
 
       <div className="flex-1">
