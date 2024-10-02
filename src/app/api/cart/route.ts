@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     const userCart = await findOrCreateCart(token);
 
     const data = (await req.json()) as CreateCartItemValues;
-    // TODO починить баг призмы. Every работает не так, как должен. Найти способ находить существующий продукт с точно теми же ингридиентами и только тогда делать +1
+    // TODO починить баг призмы. Every работает не так, как должен. Найти способ находить существующий продукт с точно теми же ингредиентами и только тогда делать +1
     const findCartItem = await prisma.cartItem.findFirst({
       where: {
         cartId: userCart.id,
