@@ -26,3 +26,4 @@ export { CartDrawer } from "./cart-drawer.tsx";
 export { CartDrawerItem } from "./cart-drawer-item.tsx";
 export { CountButton } from "./count-button.tsx";
 export { CountIconButton } from "./count-icon-button.tsx";
+export { CartEmpty } from "./cart-empty.tsx";
