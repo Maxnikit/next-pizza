@@ -8,12 +8,18 @@ import Link from "next/link";
 import React from "react";
 
 interface Props {
+  hasSearch?: boolean;
+  hasCartButton?: boolean;
   className?: string;
 }
 
-export function Header({ className }: Props) {
+export function Header({
+  hasSearch = true,
+  hasCartButton = true,
+  className,
+}: Props) {
   return (
-    <header className={cn("border border-b", className)}>
+    <header className={cn("border-b", className)}>
       <Container className="flex items-center justify-between py-8">
         {/* Левая часть */}
         <Link href="/">
@@ -28,17 +34,20 @@ export function Header({ className }: Props) {
           </div>
         </Link>
 
-        <div className="mx-10 flex-1">
-          <SearchInput />
-        </div>
+        {/* Центр - поиск */}
+        {hasSearch && (
+          <div className="mx-10 flex-1">
+            <SearchInput />
+          </div>
+        )}
+
         {/* Правая часть */}
         <div className="flex items-center gap-4">
           <Button variant="outline" className="flex items-center gap-1">
             <User size={16} />
             Войти
           </Button>
-
-          <CartButton />
+          {hasCartButton && <CartButton />}
         </div>
       </Container>
     </header>
