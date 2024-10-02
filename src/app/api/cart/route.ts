@@ -50,7 +50,8 @@ export async function POST(req: NextRequest) {
       where: {
         cartId: userCart.id,
         productVariationId: data.productVariationId,
-        ingredients: { every: { id: { in: data.ingredientsIds } } },
+        // Костыль "some: {}" помогает, но в случае когда мы сначала добавляем пиццу без ингр., потом с, и потом опять без, у нас создаётся новая позиция вместо добавления +1 к изначальной пицце без ингр.
+        ingredients: { every: { id: { in: data.ingredientsIds } }, some: {} },
       },
     });
 
@@ -74,9 +75,9 @@ export async function POST(req: NextRequest) {
     }
 
     const updatedUserCart = await updateCartTotalPrice(token);
+
     const resp = NextResponse.json(updatedUserCart);
     resp.cookies.set("cartToken", token);
-
     return resp;
   } catch (error) {
     console.log("[CART_POST] Server error", error);
