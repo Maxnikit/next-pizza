@@ -28,3 +28,4 @@ export { CountButton } from "./count-button.tsx";
 export { CountIconButton } from "./count-icon-button.tsx";
 export { CartEmpty } from "./cart-empty.tsx";
 export { WhiteBlock } from "./white-block.tsx";
+export { CheckoutCartItem } from "./checkout-cart-item.tsx";
