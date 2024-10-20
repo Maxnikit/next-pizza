@@ -12,6 +12,7 @@ type ReturnProps = {
   items: CartStateItem[];
   totalAmount: number;
   loading: boolean;
+  totalItemCount: number;
 
   updateItemQuantity: (id: number, quantity: number) => void;
   removeCartItem: (id: number) => void;
@@ -19,6 +20,15 @@ type ReturnProps = {
   cleanCart: () => void;
 };
 export const useCart = (): ReturnProps => {
+  const getTotalItemCount = (items: CartStateItem[]) => {
+    let itemCount = 0;
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      itemCount += item.quantity;
+    }
+    return itemCount;
+  };
+
   const items = useCartStore((state) => state.items);
   const totalAmount = useCartStore((state) => state.totalAmount);
   const loading = useCartStore((state) => state.loading);
@@ -26,6 +36,7 @@ export const useCart = (): ReturnProps => {
   const updateItemQuantity = useCartStore((state) => state.updateItemQuantity);
   const removeCartItem = useCartStore((state) => state.removeCartItem);
   const cleanCart = useCartStore((state) => state.cleanCart);
+  const totalItemCount = getTotalItemCount(items);
 
   const fetchCartItems = useCartStore((state) => state.fetchCartItems);
   useEffect(() => {
@@ -34,6 +45,7 @@ export const useCart = (): ReturnProps => {
 
   return {
     items,
+    totalItemCount,
     totalAmount,
     loading,
     addCartItem,

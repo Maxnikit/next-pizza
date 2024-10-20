@@ -9,16 +9,8 @@ import React from "react";
 type Props = { className?: string };
 
 export function CartButton({ className }: Props) {
-  const { totalAmount, loading, items } = useCart();
+  const { totalAmount, loading, totalItemCount } = useCart();
 
-  const getTotalItemCount = () => {
-    let itemCount = 0;
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      itemCount += item.quantity;
-    }
-    return itemCount;
-  };
   return (
     <CartDrawer>
       <Button
@@ -29,7 +21,7 @@ export function CartButton({ className }: Props) {
         <span className="mx-3 h-full w-[1px] bg-white/30" />
         <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
           <ShoppingCart className="relative" size={16} strokeWidth={2} />
-          <b>{getTotalItemCount()}</b>
+          <b>{totalItemCount}</b>
         </div>
         <ArrowRight
           size={20}

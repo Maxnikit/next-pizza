@@ -23,10 +23,15 @@ type Props = {
   children: ReactNode;
 };
 
-const totalAmount = 500;
 export function CartDrawer({ children, className }: Props) {
-  const { items, totalAmount, updateItemQuantity, cleanCart, removeCartItem } =
-    useCart();
+  const {
+    items,
+    totalAmount,
+    totalItemCount,
+    updateItemQuantity,
+    cleanCart,
+    removeCartItem,
+  } = useCart();
 
   const onClickCountButton = (
     cartItemId: number,
@@ -56,8 +61,10 @@ export function CartDrawer({ children, className }: Props) {
           {totalAmount ? (
             <>
               <SheetHeader>
+                {/* TODO Исправить склонения товаров */}
                 <SheetTitle>
-                  В корзине <span className="font-bold">3 товара</span>
+                  В корзине{" "}
+                  <span className="font-bold">{totalItemCount} товара</span>
                 </SheetTitle>
               </SheetHeader>
               <Button onClick={cleanCart}>Очистить корзину</Button>
