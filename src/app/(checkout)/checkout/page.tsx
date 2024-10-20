@@ -55,7 +55,6 @@ export default function Home() {
         />
       ));
     } else {
-      console.log("BOOP");
       return <CheckoutCartItemSkeleton />;
     }
   };
