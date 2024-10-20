@@ -1,3 +1,4 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/shared/lib";
 import React from "react";
 
@@ -9,11 +10,11 @@ export function CheckoutCartItemSkeleton({ className }: Props) {
   return (
     <div className={cn("flex items-center justify-between", className)}>
       <div className="flex items-center gap-5">
-        <div className="h-[50px] w-[50px] animate-pulse rounded-full bg-gray-200" />
-        <h2 className="h-5 w-40 animate-pulse rounded bg-gray-200" />
+        <Skeleton className="h-[60px] w-[60px] rounded-full bg-gray-200" />
+        <Skeleton className="h-5 w-40 rounded bg-gray-200" />
       </div>
-      <div className="h-5 w-10 animate-pulse rounded-full bg-gray-200" />
-      <div className="h-8 w-[133px] animate-pulse rounded-full bg-gray-200" />
+      <Skeleton className="h-5 w-14 rounded-full bg-gray-200" />
+      <Skeleton className="h-8 w-[140px] rounded-full bg-gray-200" />
     </div>
   );
 }
