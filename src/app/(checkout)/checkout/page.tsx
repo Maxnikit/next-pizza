@@ -14,7 +14,8 @@ import { getCartItemDetails } from "@/shared/lib";
 import { ArrowRight, Package, Truck } from "lucide-react";
 
 export default function Home() {
-  const { items, totalAmount, updateItemQuantity, removeCartItem } = useCart();
+  const { items, totalAmount, updateItemQuantity, removeCartItem, loading } =
+    useCart();
   const calculateDeliveryFee = (productsPrice: number) => {
     let deliveryFee;
     if (productsPrice < 850) {
@@ -29,7 +30,9 @@ export default function Home() {
   const deliveryFee = calculateDeliveryFee(productsPrice);
   const totalPrice = productsPrice + deliveryFee;
   const itemsToShow = () => {
-    if (items.length) {
+    if (loading) {
+      return <CheckoutCartItemSkeleton />;
+    } else if (items.length) {
       return items.map((item) => (
         <CheckoutCartItem
           onClickCountButton={(type) =>
@@ -55,7 +58,8 @@ export default function Home() {
         />
       ));
     } else {
-      return <CheckoutCartItemSkeleton />;
+      // TODO Добавить что-то для отображения 0 товаров
+      return <div>ПустоPLACEHOLDER</div>;
     }
   };
 

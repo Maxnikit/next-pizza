@@ -106,7 +106,7 @@ export function CartDrawer({ children, className }: Props) {
                     <span className="text-lg font-bold">{totalAmount} ₽</span>
                   </div>
 
-                  <Link href="/cart">
+                  <Link href="/checkout">
                     <Button className="h-12 w-full text-base">
                       Оформить заказ <ArrowRight className="ml-2 w-5" />
                     </Button>
