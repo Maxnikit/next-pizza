@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run db && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,7 +11,8 @@
     "prisma:studio": "prisma studio",
     "prisma:seed": "prisma db seed",
     "postinstall": "prisma generate",
-    "test": "vitest"
+    "test": "vitest",
+    "db": "sudo -u postgres psql"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma",
