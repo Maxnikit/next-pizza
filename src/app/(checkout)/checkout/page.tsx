@@ -1,29 +1,20 @@
 "use client";
 import {
   CheckoutCartItem,
+  CheckoutCartItemSkeleton,
   Container,
   Title,
   WhiteBlock,
 } from "@/shared/components/shared";
 import CheckoutPriceDetails from "@/shared/components/shared/checkout-price-details";
 import { Button, Input, Textarea } from "@/shared/components/ui";
+import { useCart } from "@/shared/hooks/use-cart";
 import { getCartItemDetails } from "@/shared/lib";
 
-import { useCartStore } from "@/shared/store/cart";
 import { ArrowRight, Package, Truck } from "lucide-react";
-import { useEffect } from "react";
 
 export default function Home() {
-  const fetchCartItems = useCartStore((state) => state.fetchCartItems);
-  const totalAmount = useCartStore((state) => state.totalAmount);
-  const items = useCartStore((state) => state.items);
-  const updateItemQuantity = useCartStore((state) => state.updateItemQuantity);
-  const removeCartItem = useCartStore((state) => state.removeCartItem);
-  const cleanCart = useCartStore((state) => state.cleanCart);
-
-  useEffect(() => {
-    fetchCartItems();
-  }, [fetchCartItems]);
+  const { items, totalAmount, updateItemQuantity, removeCartItem } = useCart();
   const calculateDeliveryFee = (productsPrice: number) => {
     let deliveryFee;
     if (productsPrice < 850) {
@@ -37,6 +28,37 @@ export default function Home() {
   const productsPrice = totalAmount;
   const deliveryFee = calculateDeliveryFee(productsPrice);
   const totalPrice = productsPrice + deliveryFee;
+  const itemsToShow = () => {
+    if (items.length) {
+      return items.map((item) => (
+        <CheckoutCartItem
+          onClickCountButton={(type) =>
+            onClickCountButton(item.id, item.quantity, type)
+          }
+          onClickDeleteButton={() => removeCartItem(item.id)}
+          key={item.id}
+          id={item.id}
+          imageUrl={item.imageUrl}
+          details={
+            item.pizzaSize && item.pizzaType && item.ingredients
+              ? getCartItemDetails(
+                  item.pizzaSize,
+                  item.pizzaType,
+                  item.ingredients,
+                )
+              : "Placeholder: This item is not Pizza!"
+          }
+          name={item.name}
+          price={item.price}
+          quantity={item.quantity}
+          disabled={item.disabled}
+        />
+      ));
+    } else {
+      console.log("BOOP");
+      return <CheckoutCartItemSkeleton />;
+    }
+  };
 
   const onClickCountButton = (
     cartItemId: number,
@@ -56,32 +78,7 @@ export default function Home() {
       <div className="flex gap-40">
         {/* Левая часть */}
         <div className="mb-20 flex flex-1 flex-col gap-10">
-          <WhiteBlock title="1. Корзина">
-            {items.map((item) => (
-              <CheckoutCartItem
-                onClickCountButton={(type) =>
-                  onClickCountButton(item.id, item.quantity, type)
-                }
-                onClickDeleteButton={() => removeCartItem(item.id)}
-                key={item.id}
-                id={item.id}
-                imageUrl={item.imageUrl}
-                details={
-                  item.pizzaSize && item.pizzaType && item.ingredients
-                    ? getCartItemDetails(
-                        item.pizzaSize,
-                        item.pizzaType,
-                        item.ingredients,
-                      )
-                    : "Placeholder: This item is not Pizza!"
-                }
-                name={item.name}
-                price={item.price}
-                quantity={item.quantity}
-                disabled={item.disabled}
-              />
-            ))}
-          </WhiteBlock>
+          <WhiteBlock title="1. Корзина">{itemsToShow()}</WhiteBlock>
           <WhiteBlock title="2. Персональные данные">
             <div className="grid grid-cols-2 gap-5">
               <Input name="firstName" className="text-base" placeholder="Имя" />

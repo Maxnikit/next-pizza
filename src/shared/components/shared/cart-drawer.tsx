@@ -11,12 +11,12 @@ import {
   SheetTrigger,
 } from "@/shared/components/ui/sheet";
 import { cn, getCartItemDetails } from "@/shared/lib";
-import { useCartStore } from "@/shared/store/cart";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React, { ReactNode, useEffect } from "react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { CartEmpty } from "@/shared/components/shared";
+import { useCart } from "@/shared/hooks/use-cart";
 
 type Props = {
   className?: string;
@@ -25,16 +25,8 @@ type Props = {
 
 const totalAmount = 500;
 export function CartDrawer({ children, className }: Props) {
-  const fetchCartItems = useCartStore((state) => state.fetchCartItems);
-  const totalAmount = useCartStore((state) => state.totalAmount);
-  const items = useCartStore((state) => state.items);
-  const updateItemQuantity = useCartStore((state) => state.updateItemQuantity);
-  const removeCartItem = useCartStore((state) => state.removeCartItem);
-  const cleanCart = useCartStore((state) => state.cleanCart);
-
-  useEffect(() => {
-    fetchCartItems();
-  }, [fetchCartItems]);
+  const { items, totalAmount, updateItemQuantity, cleanCart, removeCartItem } =
+    useCart();
 
   const onClickCountButton = (
     cartItemId: number,

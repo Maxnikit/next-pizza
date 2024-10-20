@@ -2,8 +2,8 @@
 
 import { ProductWithRelations } from "@/@types/prisma";
 import { ChoosePizzaForm, ChooseProductForm } from "@/shared/components/shared";
+import { useCart } from "@/shared/hooks/use-cart";
 import { isPizza } from "@/shared/lib";
-import { useCartStore } from "@/shared/store/cart";
 import { useRouter } from "next/navigation";
 import React from "react";
 import toast from "react-hot-toast";
@@ -13,10 +13,7 @@ type Props = {
 };
 
 export function ProductForm({ product }: Props) {
-  const [addCartItem, loading] = useCartStore((state) => [
-    state.addCartItem,
-    state.loading,
-  ]);
+  const { addCartItem, loading } = useCart();
   const firstVariation = product.variations[0];
   const router = useRouter();
 

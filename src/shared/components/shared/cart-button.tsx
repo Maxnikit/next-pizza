@@ -1,19 +1,15 @@
 "use client";
 import { CartDrawer } from "@/shared/components/shared";
 import { Button } from "@/shared/components/ui";
+import { useCart } from "@/shared/hooks/use-cart";
 import { cn } from "@/shared/lib";
-import { useCartStore } from "@/shared/store/cart";
 import { ShoppingCart, ArrowRight } from "lucide-react";
 import React from "react";
 
 type Props = { className?: string };
 
 export function CartButton({ className }: Props) {
-  const [totalAmount, loading, items] = useCartStore((state) => [
-    state.totalAmount,
-    state.loading,
-    state.items,
-  ]);
+  const { totalAmount, loading, items } = useCart();
 
   const getTotalItemCount = () => {
     let itemCount = 0;
