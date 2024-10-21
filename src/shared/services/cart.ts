@@ -1,4 +1,3 @@
-import { create } from "zustand";
 import { axiosInstance } from "@/shared/services/axios";
 import { CartDTO, CreateCartItemValues } from "@/shared/services/dto/cart.dto";
 

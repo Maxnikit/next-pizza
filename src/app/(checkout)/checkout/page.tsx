@@ -1,5 +1,7 @@
 "use client";
 import {
+  CartEmpty,
+  CheckoutCartEmpty,
   CheckoutCartItem,
   CheckoutCartItemSkeleton,
   Container,
@@ -32,7 +34,7 @@ export default function Home() {
   const itemsToShow = () => {
     if (loading) {
       return <CheckoutCartItemSkeleton />;
-    } else if (items.length) {
+    } else {
       return items.map((item) => (
         <CheckoutCartItem
           onClickCountButton={(type) =>
@@ -57,9 +59,6 @@ export default function Home() {
           disabled={item.disabled}
         />
       ));
-    } else {
-      // TODO Добавить что-то для отображения 0 товаров
-      return <div>ПустоPLACEHOLDER</div>;
     }
   };
 
@@ -71,6 +70,10 @@ export default function Home() {
     const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
     updateItemQuantity(cartItemId, newQuantity);
   };
+
+  if (!items.length) {
+    return <CheckoutCartEmpty />;
+  }
   return (
     <Container className="mt-10">
       <Title

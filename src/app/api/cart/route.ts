@@ -7,24 +7,35 @@ import { updateCartTotalPrice } from "@/shared/lib/update-cart-total-price";
 
 export async function GET(req: NextRequest) {
   try {
-    const token = req.cookies.get("cartToken")?.value;
+    // const token = req.cookies.get("cartToken")?.value;
+
+    // if (!token) {
+    //   return NextResponse.json({ items: [] });
+    // }
+    // const userCart = await prisma.cart.findFirst({
+    //   where: { token },
+    //   include: {
+    //     items: {
+    //       orderBy: { createdAt: "desc" },
+    //       include: {
+    //         productVariation: { include: { product: true } },
+    //         ingredients: true,
+    //       },
+    //     },
+    //   },
+    // });
+    let token = req.cookies.get("cartToken")?.value;
 
     if (!token) {
-      return NextResponse.json({ items: [] });
+      token = crypto.randomUUID();
     }
-    const userCart = await prisma.cart.findFirst({
-      where: { token },
-      include: {
-        items: {
-          orderBy: { createdAt: "desc" },
-          include: {
-            productVariation: { include: { product: true } },
-            ingredients: true,
-          },
-        },
-      },
-    });
-    return NextResponse.json(userCart);
+
+    const userCart = await findOrCreateCart(token);
+    const updatedUserCart = await updateCartTotalPrice(token);
+
+    const resp = NextResponse.json(updatedUserCart);
+    resp.cookies.set("cartToken", token);
+    return resp;
   } catch (error) {
     console.log("[CART_GET] Server error", error);
     return NextResponse.json(

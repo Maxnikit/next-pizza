@@ -30,3 +30,4 @@ export { CartEmpty } from "./cart-empty.tsx";
 export { WhiteBlock } from "./white-block.tsx";
 export { CheckoutCartItem } from "./checkout-cart-item.tsx";
 export { CheckoutCartItemSkeleton } from "./checkout-cart-item-skeleton.tsx";
+export { CheckoutCartEmpty } from "./checkout-cart-empty.tsx";

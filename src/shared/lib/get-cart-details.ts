@@ -1,6 +1,5 @@
 import { calcCartItemTotalPrice } from "@/shared/lib/calc-cart-item-total-price";
 import { CartDTO } from "@/shared/services/dto/cart.dto";
-import { Cart } from "@prisma/client";
 
 export type CartStateItem = {
   id: number;

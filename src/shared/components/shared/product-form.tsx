@@ -21,16 +21,13 @@ export function ProductForm({ product }: Props) {
     productVariationId: number,
     ingredientsIds?: number[],
   ) => {
-    console.log(ingredientsIds);
     try {
       if (isPizza(product)) {
-        console.log(1);
         await addCartItem({
           productVariationId,
           ingredientsIds,
         });
       } else {
-        console.log(2);
         await addCartItem({ productVariationId });
       }
 

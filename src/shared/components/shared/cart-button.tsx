@@ -10,7 +10,6 @@ type Props = { className?: string };
 
 export function CartButton({ className }: Props) {
   const { totalAmount, loading, totalItemCount } = useCart();
-
   return (
     <CartDrawer>
       <Button
